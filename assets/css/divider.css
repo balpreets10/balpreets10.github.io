@@ -1,0 +1,38 @@
+.divider {
+  position: relative;
+  border-bottom: 3px solid #1c1b3c;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+.divider-custom {
+    margin: 0 0 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .divider-custom .divider-custom-line {
+    width: 70%;
+    /* max-width: 15rem; */
+    height: 0.2rem;
+    background-color: #361d9c;
+    border-radius: 1rem;
+    border-color: #104b87;
+  }
+  .divider-custom .divider-custom-line:first-child {
+    margin-right: 1rem;
+  }
+  .divider-custom .divider-custom-line:last-child {
+    margin-left: 1rem;
+  }
+  .divider-custom .divider-custom-icon {
+    color: #5e1682;
+    font-size: 2rem;
+  }
+  .divider-custom.divider-light .divider-custom-line {
+    background-color: #fff;
+  }
+  .divider-custom.divider-light .divider-custom-icon {
+    color: #fff;
+  }
