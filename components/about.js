@@ -8,7 +8,7 @@ export const renderAbout = () => {
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
       <div class="row justify-content-start">
-        <div class="col-3 col-lg-9">
+        <div class="col-9 col-lg-9">
           <h1>BALPREET SINGH</h1>
         </div>
         <div class="col-3 col-lg-3">
