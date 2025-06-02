@@ -1,4 +1,4 @@
-const VERSION = 1.2;
+const VERSION = 1.3;
 
 import { renderAbout } from './components/about.js?v=${VERSION}';
 import { renderEducation } from './components/education.js?v=${VERSION}';

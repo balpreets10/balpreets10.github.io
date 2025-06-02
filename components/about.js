@@ -6,22 +6,12 @@ export const renderAbout = () => {
       <!-- Section Title -->
 
 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <div class="container" data-aos="fade-right" data-aos-delay="100">
       <div class="row justify-content-start">
-        <div class="col-9 col-lg-9">
+        <div class="col">
           <h1>BALPREET SINGH</h1>
         </div>
-        <div class="col-3 col-lg-3">
-
-          <a
-            class="dlresume"
-            href="https://balpreets10.github.io/Resume/assets/Balpreet Singh CV.pdf"
-            class="btn-download align-items-center"
-            target="_blank"
-            rel="noopener noreferrer">
-            <i class="fa-solid fa-download"></i>&nbsp&nbsp&nbsp&nbspCV</a>
-           
-        </div>
+        
         <div class="row justify-content-start"></div>
         <p>
           I am
@@ -33,6 +23,7 @@ export const renderAbout = () => {
             aria-hidden="true"></span>
         </p>
         <div class="social-links">
+       
           <a
             href="https://linkedin.com/in/balpreets7"
             target="_blank"
@@ -43,20 +34,31 @@ export const renderAbout = () => {
             href="https://instagram.com/balpreets7"
             target="_blank"
             rel="noopener noreferrer">
-            <i class="bi bi-instagram"></i
-          ></a>
+            <i class="bi bi-instagram"></i></a>
           <a
             href="https://facebook.com/balpreets7"
             target="_blank"
             rel="noopener noreferrer"
-            ><i class="bi bi-facebook"></i
-          ></a>
+            ><i class="bi bi-facebook"></i></a>
           <a
             href="https://x.com/balpreets7"
             target="_blank"
             rel="noopener noreferrer"
-            ><i class="bi bi-twitter-x"></i
-          ></a>
+            ><i class="bi bi-twitter-x"></i></a>
+           <a
+            href="https://balpreets7.itch.io/"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><i class="fa-brands fa-itch-io"></i></a>
+
+          
+           <a
+            class="dlresume"
+            href="https://balpreets10.github.io/assets/Balpreet Singh CV.pdf"
+            class="btn-download align-items-center"
+            target="_blank"
+            rel="noopener noreferrer">
+            <i class="fa-solid fa-download"></i>&nbsp(CV)</a>
         </div>
       </div>
 
@@ -76,12 +78,13 @@ export const renderAbout = () => {
  
    
 
-            I am a Technical Team Leader with Game Dev experience of 8 years specialising in Code Design</br>
-            and majorly focussed on Scalability and Modularity. Versatile, Organizational, Problem Solving and</br>
-            my Array of experience gives me an edge in understanding the broader picture of any project.</br>
+            <i class="fa-solid fa-check-to-slot"></i> Technical Team Leader</br>
+            <i class="fa-solid fa-check-to-slot"></i> Game Dev Exp : 8 years</br>
+            <i class="fa-solid fa-check-to-slot"></i> Specialization : Code Design, Scalability and Modularity</br>
+            <i class="fa-solid fa-check-to-slot"></i> Versatile, Organizational, Problem Solver</br>
+            My Array of experience gives me an edge in understanding the broader picture of any project.</br>
             I have excellent Communication Skills and I thrive on taking responsibility within a team environment </br>
-            with a desire to lead people to reach a common goal. I strongly believe that Harmony between teams</br>
-            bring out the best of any Product Development Life Cycle and I feel I have the ability to be the "Harmonizer".
+            with a desire to lead people to reach a common goal. I frequently use AI to make my workflow efficient</br>
           </p>
         </div>
       </div>
