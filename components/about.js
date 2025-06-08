@@ -73,18 +73,16 @@ export const renderAbout = () => {
         </div><!-- End Section Title -->
         <div>
           <p>
-             
-  
- 
-   
-
             <i class="fa-solid fa-check-to-slot"></i> Technical Team Leader</br>
             <i class="fa-solid fa-check-to-slot"></i> Game Dev Exp : 8 years</br>
             <i class="fa-solid fa-check-to-slot"></i> Specialization : Code Design, Scalability and Modularity</br>
             <i class="fa-solid fa-check-to-slot"></i> Versatile, Organizational, Problem Solver</br>
-            My Array of experience gives me an edge in understanding the broader picture of any project.</br>
-            I have excellent Communication Skills and I thrive on taking responsibility within a team environment </br>
-            with a desire to lead people to reach a common goal. I frequently use AI to make my workflow efficient</br>
+            I have succesfully shipped 4 Titles on IOS, Android, PC and Web platforms increasing company portfolio by 30%</br>
+            Managing multiple multicultural teams of 3 and 14 people, achieving 100% project deadlines successfully </br>
+            Reduced game build times by 20% using build automation via CI-CD Pipelines </br>
+            and built scalable and flexible frameworks that improved developer output by 25%</br>
+            Led client workshops to translate business requirements into technical specs,</br>
+            reducing revision cycles by 30% and accelerating time-to-market</br>
           </p>
         </div>
       </div>
