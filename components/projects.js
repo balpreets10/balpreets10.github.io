@@ -1,5 +1,5 @@
 export const renderProjects = () => {
-    return `
+  return `
     <section id="portfolio" class="portfolio section">
       <div class="container section-title" data-aos="fade-up">
         <h2>PORTFOLIO</h2>
@@ -282,7 +282,8 @@ export const renderProjects = () => {
                 <a href="https://www.webzool.io/" class="btn-visit align-items-center" target="_blank"
                   rel="noopener noreferrer">Visit Website</a></br></br>
                 <a href="https://apps.apple.com/in/app/rsfun/id1495582389/" class="btn-visit align-items-center"
-                  target="_blank" rel="noopener noreferrer">App Link</a>
+                  target="_blank" rel="noopener noreferrer">App Link</a> <a href="https://playriverathome.net/" class="btn-visit align-items-center" target="_blank"
+                  rel="noopener noreferrer">Web Link</a></br></br>
 
                 </ul>
               </div>

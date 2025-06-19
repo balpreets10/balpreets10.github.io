@@ -17,7 +17,7 @@ export const renderAbout = () => {
           I am
           <span
             class="typed"
-            data-typed-items="Technical Team Lead, Game Developer, Unity Programmer, C# Expert"></span>
+            data-typed-items="Team Lead, Senior Game Developer, Unity Programmer, C# Expert"></span>
           <span
             class="typed-cursor typed-cursor--blink"
             aria-hidden="true"></span>
@@ -73,10 +73,10 @@ export const renderAbout = () => {
         </div><!-- End Section Title -->
         <div>
           <p>
-            <i class="fa-solid fa-check-to-slot"></i> Technical Team Leader</br>
+            <i class="fa-solid fa-check-to-slot"></i> Team Leader</br>
             <i class="fa-solid fa-check-to-slot"></i> Game Dev Exp : 8 years</br>
-            <i class="fa-solid fa-check-to-slot"></i> Specialization : Code Design, Scalability and Modularity</br>
-            <i class="fa-solid fa-check-to-slot"></i> Versatile, Organizational, Problem Solver</br>
+            <i class="fa-solid fa-check-to-slot"></i> Specialization : Code Design, Scalability and Modularity, Multiplayer</br>
+            <i class="fa-solid fa-check-to-slot"></i> Versatile, Organizational, Problem Solver</br></br>
             I have succesfully shipped 4 Titles on IOS, Android, PC and Web platforms increasing company portfolio by 30%</br>
             Managing multiple multicultural teams of 3 and 14 people, achieving 100% project deadlines successfully </br>
             Reduced game build times by 20% using build automation via CI-CD Pipelines </br>
