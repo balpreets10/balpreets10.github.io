@@ -42,6 +42,17 @@ export const renderProjects = () => {
             </div>
           </div>
 
+          <!-- Portfolio Item F7Fun-->
+          <div class="col-md-6 col-lg-4 mb-5">
+            <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModalf7fun">
+              <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                <div class="portfolio-item-caption-content text-center text-white"><strong class="fas fa-link fa-3x">F7 
+                    Fun</strong>
+                </div>
+              </div>
+              <img class="img-fluid" src="assets/img/portfolio/f7fun-2.png" alt="F7 Fun" />
+            </div>
+          </div>
           <!-- Portfolio Item 1-->
           <div class="col-md-6 col-lg-4 mb-5">
             <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
@@ -266,7 +277,7 @@ export const renderProjects = () => {
                     diagnostics</li>
                   <li>Implement Scalable mechanisms to add Minigames later on in the project lifecycle which
                     facilitated dynamic addition of Minigames without the need of updating the app itself</li>
-                  <li>Manage a team of 15 frontend developers, distribute and monitor tasks given to them using JIRA
+                  <li>Manage a team of 14 frontend developers, distribute and monitor tasks given to them using JIRA
                   </li>
                   <li>Implement Asset Bundles resulting in lower Initial APK size</li>
                   <li>Implement Scriptable Objects to create Multiple GUI Skins for the same UI</li>
@@ -292,6 +303,71 @@ export const renderProjects = () => {
         </div>
       </div>
     </div>
+
+     <!-- Portfolio Modal 1-->
+    <div class="portfolio-modal modal fade" id="portfolioModalf7fun" tabindex="-1" aria-labelledby="portfolioModalf7fun"
+      aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal"
+              aria-label="Close"></button></div>
+          <div class="modal-body text-center pb-5">
+            <div class="container portfolio-details">
+              <div class="row justify-content-center">
+                <div class="col-lg-8">
+                  <!-- Portfolio Modal - Title-->
+                  <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">F7 Fun</h2>
+                  <!-- Icon Divider-->
+                  <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                  </div>
+                  <!-- Portfolio Modal - Image-->
+                  <img class="img-fluid rounded mb-5" src="assets/img/portfolio/f7fun-2.png" alt="F7 Fun" />
+                  <div class="divider"></div>
+                  <!-- Portfolio Modal - Text-->
+                  <p class="mb-4">F7Fun is free casino slot game. It provides casino players with more than 70 slot
+                    games along with bonuses</p>
+                </div>
+              </div>
+              <div class="portfolio-info">
+                <br>
+                <li><strong>Category : </strong>IOS</li>
+                <li><strong>Client : </strong> Golden Scatter</li>
+                <li><strong>Platform : </strong> Unity</li>
+                <h3>Roles and Responsibilities</h3>
+                <ul>
+                  <li>Implemented a new Core Engine for Slot game which lowered Game Addition Time by 30%</li>
+                  <li>Designed an automated Custom Build Test System resulting in lower test times and faster
+                    diagnostics</li>
+                  <li>Implement Scalable mechanisms to add Minigames later on in the project lifecycle which
+                    facilitated dynamic addition of Minigames without the need of updating the app itself</li>
+                  <li>Manage a team of 14 frontend developers, distribute and monitor tasks given to them using JIRA
+                  </li>
+                  <li>Implement Asset Bundles resulting in lower Initial APK size</li>
+                  <li>Implement Scriptable Objects to create Multiple GUI Skins for the same UI</li>
+                  <li>Integrate Caching Mechanism to make efficient use of Internet Bandwidth while also making sure
+                    that updates are fetched as soon as available</li>
+                  <li>Migrated from Asset Bundles to Addressables in order to stay up-to date with advancing
+                    technologies</li>
+                  <li>Build and Deploy updates on App Store</li>
+
+
+                </ul>
+                <a href="https://apps.apple.com/gr/app/f7fun-latest-casino-games/id1569168650/" class="btn-visit align-items-center"
+                  target="_blank" rel="noopener noreferrer">App Link</a>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+
+    
     <!-- Portfolio Modal 2-->
     <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" aria-labelledby="portfolioModal2"
       aria-hidden="true">
@@ -350,6 +426,8 @@ export const renderProjects = () => {
         </div>
       </div>
     </div>
+
+
     <!-- Portfolio Modal 3-->
     <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" aria-labelledby="portfolioModal3"
       aria-hidden="true">
