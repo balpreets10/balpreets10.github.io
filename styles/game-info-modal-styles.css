@@ -1,0 +1,108 @@
+/* Game Modal Specific Styles - Built on base-modal-styles.css */
+
+/* Game Modal Overrides */
+.game-modal .modal-dialog {
+    max-width: 600px;
+    margin-top: 80px;
+    width: 90%;
+    align-items: center;
+    /* Add these properties to ensure centering */
+    justify-content: center;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.game-modal .modal-content {
+    max-height: calc(100vh - 40px);
+}
+
+.game-modal .modal-title {
+    font-size: 1.5rem;
+}
+
+/* Game Info Sections */
+.game-modal .info-section {
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.05), rgba(0, 136, 255, 0.03));
+    border-radius: 15px;
+    border: 1px solid rgba(0, 255, 136, 0.1);
+    transition: all 0.3s ease;
+}
+
+.game-modal .info-section:hover {
+    border-color: rgba(0, 255, 136, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0, 255, 136, 0.1);
+}
+
+.game-modal .info-section h4 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 600;
+}
+
+.game-modal .info-section p {
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.game-modal .info-section p:last-child {
+    margin-bottom: 0;
+}
+
+.game-modal .info-section strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .game-modal .modal-dialog {
+        width: 95vw;
+        margin: 0.9rem auto;
+        min-height: calc(100vh - 1rem);
+        margin-top: 50px;
+        justify-content: center;
+    }
+
+    .game-modal .modal-title {
+        font-size: 1.3rem;
+    }
+
+    .game-modal .info-section {
+        padding: 1.2rem;
+        margin-bottom: 1.2rem;
+        border-radius: 1rem;
+        border: 2px solid rgba(0, 255, 136, 0.2);
+    }
+
+    .game-modal .info-section h4 {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-modal .modal-dialog {
+        width: 98%;
+        margin-top: 2rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .game-modal .modal-title {
+        font-size: 1.2rem;
+    }
+
+    .game-modal .info-section {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+}
