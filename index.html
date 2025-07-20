@@ -2,256 +2,270 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Balpreet Singh - Senior Game Developer</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Balpreet Singh - Unity Team Lead / Senior Game Developer</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
 
-    <!-- Auto-versioning CSS -->
-    <script>
-        // Auto-generate version based on current timestamp
-        const version = Date.now();
-        document.write('<link rel="stylesheet" href="styles/animation-keyframes.css?v=' + version + '">');
-        document.write('<link rel="stylesheet" href="styles/styles.css?v=' + version + '">');
-        document.write('<link rel="stylesheet" href="styles/base-modal-styles.css?v=' + version + '">');
-        document.write('<link rel="stylesheet" href="styles/game-info-modal-styles.css?v=' + version + '">');
-        document.write('<link rel="stylesheet" href="styles/project-modal-styles.css?v=' + version + '">');
-        document.write('<link rel="stylesheet" href="styles/game-styles.css?v=' + version + '">');
-        document.write('<link rel="stylesheet" href="styles/nav-styles.css?v=' + version + '">');
-        document.write('<link rel="stylesheet" href="styles/hero-styles.css?v=' + version + '">');
-        document.write('<link rel="stylesheet" href="styles/projects-styles.css?v=' + version + '">');
-        document.write('<link rel="stylesheet" href="styles/skills-styles.css?v=' + version + '">');
-        document.write('<link rel="stylesheet" href="styles/experience-styles.css?v=' + version + '">');
-        document.write('<link rel="stylesheet" href="styles/contact-styles.css?v=' + version + '">');
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-    </script>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body>
-    <div class="cursor"></div>
-    <div class="background"></div>
-    <div class="code-rain" id="codeRain"></div>
+<body class="index-page">
 
-    <div class="scroll-indicator">
-        <div class="scroll-progress" id="scrollProgress"></div>
-    </div>
+  <!-- Managers -->
 
-    <header class="header">
-        <nav class="nav-container">
-            <a href="#" class="logo">BALPREET SINGH</a>
-            <div class="nav-links">
-                <a href="#home">Home</a>
-                <a href="#game">Game</a>
-                <a href="#projects">Projects</a>
-                <a href="#skills">Skills</a>
-                <a href="#experience">Experience</a>
-                <a href="#contact">Contact</a>
-            </div>
-        </nav>
-    </header>
-
-    <div class="container">
+  <script src="js/managers/CSSManager.js"></script>
+  <script src="js/managers/SectionManager.js"></script>
+  <script src="js/managers/NavigationManager.js"></script>
+  <script src="js/managers/PreloaderManager.js"></script>
 
 
-        <!-- Hero Section -->
-        <section class="hero" id="home">
-            <div class="loading-placeholder">
-                <h2>Loading Hero Section...</h2>
-            </div>
-        </section>
+  <!-- Data -->
+  <script src="js/data/projects-data.js"></script>
 
-        <!-- Game Section -->
-        <section class="game-section" id="game">
-            <div class="loading-placeholder">
-                <h2>Loading Game Section...</h2>
-            </div>
-        </section>
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
+    <i class="bi bi-arrow-up"></i>
+  </a>
 
-        <!-- Projects Section -->
-        <section id="projects" class="game-section">
-            <div class="loading-placeholder">
-                <h2>Loading Projects...</h2>
-            </div>
-        </section>
+  <!-- Preloader -->
+  <div id="preloader"></div>
 
-        <!-- Skills Section -->
-        <section id="skills" class="game-section">
-            <div class="loading-placeholder">
-                <h2>Loading Skills...</h2>
-            </div>
-        </section>
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
-        <!-- Experience Section -->
-        <section id="experience" class="game-section">
-            <div class="loading-placeholder">
-                <h2>Loading Experience...</h2>
-            </div>
-        </section>
+  <!-- Application Initialization -->
+  <!-- Updated Application Initialization Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', async function () {
+      try {
+        console.log('Initializing portfolio website...');
 
-        <!-- Contact Section -->
-        <section id="contact" class="game-section">
-            <div class="loading-placeholder">
-                <h2>Loading Contact...</h2>
-            </div>
-        </section>
+        // 1. Initialize PreloaderManager first
+        window.preloaderManager = new PreloaderManager();
 
-        <footer>
-            <div class="footer-content">
-                <h2>BALPREET SINGH</h2><br>
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/in/balpreets7/" target="_blank" rel="noopener noreferrer"
-                        title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://github.com/balpreets10/" target="_blank" rel="noopener noreferrer"
-                        title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="https://x.com/balpreets7" target="_blank" rel="noopener noreferrer" title="Twitter"><i
-                            class="fab fa-twitter"></i></a>
-                    <a href="https://balpreets7.itch.io/" target="_blank" rel="noopener noreferrer" title="Itch.IO"><i
-                            class="fab fa-itch-io"></i></a>
-                </div>
-                <p class="footer-text">© 2025 Balpreet Singh. Crafted with passion for gaming excellence.</p>
-            </div>
-        </footer>
-    </div>
+        // 2. Load CSS files first via CSSManager
+        await window.CSSManager.loadPreloaded();
+        console.log('CSS files loaded');
 
-    <!-- Core Scripts -->
-    <script src="js/projects-data.js"></script>
-    <script src="js/modals/ProjectModal.js"></script>
-    <script src="js/modals/GameInfoModal.js"></script>
-    <script src="js/effects/GamingMenuSystem.js"></script>
-    <script src="js/effects/ScrollToTop.js"></script>
+        // 3. Register all sections with SectionManager
+        registerSections();
 
-    <!-- Section Scripts -->
-    <script src="js/sections/HeroSection.js"></script>
-    <script src="js/sections/GameSection.js"></script>
-    <script src="js/sections/ProjectsSection.js"></script>
-    <script src="js/sections/SkillsSection.js"></script>
-    <script src="js/sections/ExperienceSection.js"></script>
-    <script src="js/sections/ContactSection.js"></script>
+        // 4. Render all sections
+        await window.sectionManager.renderAllSections();
+        console.log('All sections rendered');
 
-    <!-- Effects and Animations -->
-    <script src="js/effects/AnimationEffects.js"></script>
+        // 5. Initialize core functionality (but don't remove preloader yet)
+        await initializeCoreFeatures(false); // Pass false to skip preloader removal
 
-    <!-- Section Manager -->
-    <script src="js/SectionManager.js"></script>
+        // 6. Initialize NavigationManager after sections are rendered
+        setTimeout(() => {
+          initializeNavigationManager();
+        }, 200);
 
-    <!-- Main Application Script -->
-    <script>
-        // Global variables
-        let sectionManager;
-        let animationEffects;
-        let unityGameLoader;
+        // 7. Mark loading as complete - this triggers the enhanced preloader animation
+        await window.preloaderManager.markLoadingComplete();
 
-        // Main initialization
-        function initializeApp() {
-            console.log('Initializing Portfolio Application...');
+        console.log('Portfolio website initialized successfully');
 
-            try {
-                // Initialize section manager
-                sectionManager = new SectionManager();
+      } catch (error) {
+        console.error('Error initializing portfolio website:', error);
+        // Fallback: force remove preloader if there's an error
+        if (window.preloaderManager) {
+          window.preloaderManager.forceRemove();
+        }
+      }
+    });
 
-                // Initialize animation effects
-                animationEffects = new AnimationEffects();
-                console.log('Portfolio application initialized successfully');
+    /**
+     * Register all sections with their configurations
+     * CSS loading removed - handled by CSSManager
+     */
+    function registerSections() {
+      const sections = [
+        {
+          id: 'header',
+          class: 'HeaderSection',  // String class name - will be resolved by SectionManager
+          container: 'body',
+          order: 0,
+          loadJS: true   // Only JS loading now
+        },
+        {
+          id: 'hero',
+          class: 'HeroSection',
+          container: 'main',
+          order: 1,
+          loadJS: true
+        },
+        {
+          id: 'game',
+          class: 'GameSection',
+          container: 'main',
+          order: 2,
+          loadJS: true
+        },
+        {
+          id: 'portfolio',
+          class: 'PortfolioSection',
+          container: 'main',
+          order: 3,
+          loadJS: true
+        },
+        {
+          id: 'skills',
+          class: 'SkillsSection',
+          container: 'main',
+          order: 4,
+          loadJS: true
+        },
+        {
+          id: 'experience',
+          class: 'ExperienceSection',
+          container: 'main',
+          order: 5,
+          loadJS: true
+        },
+        {
+          id: 'testimonials',
+          class: 'TestimonialsSection',
+          container: 'main',
+          order: 6,
+          loadJS: true
+        },
+        {
+          id: 'contact',
+          class: 'ContactSection',
+          container: 'main',
+          order: 7,
+          loadJS: true
+        },
+        {
+          id: 'footer',
+          class: 'FooterSection',
+          container: 'body',
+          order: 8,
+          loadJS: true
+        }
+      ];
 
-            } catch (error) {
-                console.error('Failed to initialize application:', error);
-            }
+      window.sectionManager.registerSections(sections);
+      console.log('Sections registered:', sections.map(s => s.id));
+    }
+
+    /**
+  * Initialize core website features
+  * @param {boolean} removePreloader - Whether to remove preloader (default: true)
+  */
+    async function initializeCoreFeatures(removePreloader = true) {
+      // Remove preloader only if explicitly requested (old behavior)
+      if (removePreloader) {
+        const preloader = document.querySelector('#preloader');
+        if (preloader) {
+          preloader.remove();
+        }
+      }
+
+      // Initialize header toggle functionality
+      initializeHeaderToggle();
+
+      // Initialize scroll top functionality  
+      initializeScrollTop();
+
+      // Initialize AOS (Animate On Scroll)
+      if (typeof AOS !== 'undefined') {
+        AOS.init({
+          duration: 800,
+          easing: 'ease-in-out',
+          once: true,
+          mirror: false
+        });
+        console.log('AOS initialized');
+      }
+    }
+
+    /**
+     * Initialize header toggle functionality
+     */
+    function initializeHeaderToggle() {
+      const headerToggleBtn = document.querySelector('.header-toggle');
+      const header = document.querySelector('#header');
+
+      if (headerToggleBtn && header) {
+        headerToggleBtn.addEventListener('click', function () {
+          header.classList.toggle('header-show');
+          headerToggleBtn.classList.toggle('bi-list');
+          headerToggleBtn.classList.toggle('bi-x');
+        });
+        console.log('Header toggle initialized');
+      }
+    }
+
+    /**
+     * Initialize scroll top button functionality
+     */
+    function initializeScrollTop() {
+      const scrollTop = document.querySelector('.scroll-top');
+
+      if (scrollTop) {
+        function toggleScrollTop() {
+          window.scrollY > 100
+            ? scrollTop.classList.add('active')
+            : scrollTop.classList.remove('active');
         }
 
-        // Initialize everything when DOM is loaded
-        document.addEventListener('DOMContentLoaded', initializeApp);
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            console.log('Window resized, updating components...');
-
-            if (sectionManager) {
-                sectionManager.handleResize();
-            }
-
-            if (animationEffects) {
-                animationEffects.handleResize();
-            }
-
-            if (unityGameLoader) {
-                unityGameLoader.handleResize();
-            }
+        scrollTop.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
         });
 
-        // Handle page visibility changes
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                console.log('Page hidden, pausing animations...');
+        window.addEventListener('scroll', toggleScrollTop);
+        toggleScrollTop(); // Initial check
 
-                // Pause animations and intensive processes
-                if (animationEffects) {
-                    animationEffects.pauseAnimations();
-                }
+        console.log('Scroll top functionality initialized');
+      }
+    }
 
-                if (unityGameLoader && unityGameLoader.unityInstance) {
-                    // Pause Unity game if available
-                    unityGameLoader.pauseGame();
-                }
-
-            } else {
-                console.log('Page visible, resuming animations...');
-
-                // Resume animations and processes
-                if (animationEffects) {
-                    animationEffects.resumeAnimations();
-                }
-
-                if (unityGameLoader && unityGameLoader.unityInstance) {
-                    // Resume Unity game if available
-                    unityGameLoader.resumeGame();
-                }
-            }
-        });
-
-        // Handle page unload cleanup
-        window.addEventListener('beforeunload', () => {
-            console.log('Cleaning up resources...');
-
-            if (animationEffects) {
-                animationEffects.cleanup();
-            }
-
-            if (unityGameLoader) {
-                unityGameLoader.cleanup();
-            }
-        });
-    </script>
-
-    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top"></button>
+    /**
+     * Initialize NavigationManager
+     */
+    function initializeNavigationManager() {
+      if (window.NavigationManager) {
+        window.navigationManager = new NavigationManager();
+        console.log('NavigationManager initialized');
+      } else {
+        console.error('NavigationManager class not found');
+      }
+    }
+  </script>
 </body>
-<script>
-    // Emergency header fix - add right after <body> tag
-    setInterval(() => {
-        const header = document.querySelector('header');
-        if (header && window.innerWidth <= 768) {
-            header.style.cssText = `
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            width: 100% !important;
-            z-index: 9999 !important;
-            background: rgba(11, 41, 27, 0.98) !important;
-            transform: translate3d(0, 0, 0) !important;
-        `;
-        }
-
-        // Ensure scroll button stays properly positioned
-        if (scrollBtn && window.innerWidth <= 768) {
-            scrollBtn.style.position = 'fixed';
-            scrollBtn.style.bottom = '20px';
-            scrollBtn.style.right = '20px';
-            scrollBtn.style.zIndex = '9998';
-        }
-    }, 50);
-</script>
 
 </html>

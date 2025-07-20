@@ -1,0 +1,563 @@
+/**
+ * Experience Section - Modern Glassmorphism Design
+ * Updated to use theme variables from variables.css
+ */
+
+/* Section Container */
+
+/* Experience Section - Consistent spacing with skills section */
+.experience-glass {
+    padding: 100px 0;
+    min-height: auto;
+    /* Remove min-height constraint */
+}
+
+/* Override Bootstrap py-5 padding for consistency */
+.experience-glass.py-5 {
+    padding: 100px 0 !important;
+}
+
+.experience-glass::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at 20% 50%, color-mix(in srgb, var(--accent-color), transparent 90%) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 50%, color-mix(in srgb, var(--tertiary-accent), transparent 90%) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.experience-glass .container-fluid {
+    position: relative;
+    z-index: 2;
+}
+
+/* Section Header */
+.section-header-glass {
+    background: color-mix(in srgb, var(--default-color), transparent 97%);
+    border: var(--border-width-thin) solid color-mix(in srgb, var(--default-color), transparent 90%);
+    border-radius: var(--border-radius-xl);
+    padding: 3rem 2rem;
+    backdrop-filter: var(--btn-glass-backdrop);
+    box-shadow:
+        0 8px 32px color-mix(in srgb, var(--contrast-color), transparent 70%),
+        inset 0 1px 0 color-mix(in srgb, var(--default-color), transparent 90%);
+    margin-bottom: 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.section-header-glass::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            var(--accent-color) 20%,
+            var(--tertiary-accent) 50%,
+            var(--secondary-accent) 80%,
+            transparent 100%);
+}
+
+.section-title-main {
+    font-size: 3.5rem;
+    font-weight: 700;
+    font-family: var(--heading-font);
+    background: linear-gradient(135deg,
+            var(--accent-color) 0%,
+            var(--tertiary-accent) 50%,
+            var(--secondary-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 30px var(--glow-green);
+    letter-spacing: -1px;
+}
+
+.section-subtitle-glass {
+    font-size: 1.2rem;
+    color: color-mix(in srgb, var(--default-color), transparent 20%);
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
+.header-divider-glass {
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-color), var(--tertiary-accent));
+    margin: 0 auto;
+    border-radius: 3px;
+    box-shadow: 0 0 15px var(--glow-green);
+}
+
+/* Experience Cards */
+.experience-card-glass {
+    background: color-mix(in srgb, var(--default-color), transparent 95%);
+    border: var(--border-width-thin) solid color-mix(in srgb, var(--card-border-color), transparent 10%);
+    border-radius: var(--border-radius-large);
+    backdrop-filter: var(--btn-glass-backdrop);
+    position: relative;
+    transition: all var(--transition-normal);
+    overflow: hidden;
+    box-shadow:
+        0 8px 32px color-mix(in srgb, var(--contrast-color), transparent 80%),
+        inset 0 1px 0 color-mix(in srgb, var(--default-color), transparent 90%);
+}
+
+.experience-card-featured {
+    background: color-mix(in srgb, var(--accent-color), transparent 90%);
+    border: var(--border-width-normal) solid color-mix(in srgb, var(--card-border-color), transparent 70%);
+    border-radius: var(--border-radius-large);
+    backdrop-filter: var(--btn-glass-backdrop);
+    position: relative;
+    transition: all var(--transition-normal);
+    overflow: hidden;
+    box-shadow:
+        0 12px 40px color-mix(in srgb, var(--accent-color), transparent 80%),
+        inset 0 1px 0 color-mix(in srgb, var(--accent-color), transparent 80%);
+}
+
+.experience-card-glass:hover,
+.experience-card-featured:hover {
+    transform: translateY(-8px) scale(1.3);
+    border-color: var(--accent-color);
+    border-width: var(--border-width-normal);
+    box-shadow:
+        0 20px 60px color-mix(in srgb, var(--accent-color), transparent 70%),
+        inset 0 1px 0 color-mix(in srgb, var(--default-color), transparent 80%);
+}
+
+.card-glow-effect {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            color-mix(in srgb, var(--accent-color), transparent 90%),
+            transparent);
+    transition: left 0.6s ease;
+}
+
+.experience-card-glass:hover .card-glow-effect,
+.experience-card-featured:hover .card-glow-effect {
+    left: 100%;
+}
+
+/* Card Header - Most Prominent */
+.card-header-glass {
+    padding: 2rem 2rem 1rem 2rem;
+    border-bottom: var(--border-width-thin) solid color-mix(in srgb, var(--default-color), transparent 90%);
+    position: relative;
+}
+
+.company-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.company-name-prominent {
+    font-size: 2rem;
+    font-weight: 800;
+    font-family: var(--heading-font);
+    color: var(--accent-color);
+    text-shadow:
+        0 0 20px var(--glow-green),
+        0 0 40px color-mix(in srgb, var(--accent-color), transparent 70%);
+    margin: 0;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+}
+
+.duration-chip {
+    background: linear-gradient(135deg,
+            var(--secondary-accent),
+            var(--quaternary-accent));
+    color: var(--contrast-color);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    box-shadow:
+        0 0 20px var(--glow-magenta),
+        0 4px 15px color-mix(in srgb, var(--secondary-accent), transparent 70%);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.position-prominent {
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-family: var(--heading2-font);
+    background: linear-gradient(135deg,
+            var(--tertiary-accent),
+            var(--secondary-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 0 1rem 0;
+    text-shadow: 0 0 15px var(--glow-blue);
+}
+
+.location-meta {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.location-badge,
+.type-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: color-mix(in srgb, var(--default-color), transparent 10%);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.location-badge i,
+.type-badge i {
+    color: var(--accent-color);
+    font-size: 1rem;
+}
+
+/* Card Body */
+.card-body-glass {
+    padding: 1.5rem 2rem 2rem 2rem;
+}
+
+.description-text {
+    color: color-mix(in srgb, var(--default-color), transparent 20%);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    font-weight: 400;
+}
+
+/* Achievements - Plain Style */
+.achievements-section {
+    margin-bottom: 2rem;
+}
+
+.achievements-header {
+    color: color-mix(in srgb, var(--default-color), transparent 10%);
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.8;
+}
+
+.achievements-list-plain {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.achievement-plain {
+    color: color-mix(in srgb, var(--default-color), transparent 30%);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+    padding-left: 1.2rem;
+    position: relative;
+    font-weight: 400;
+}
+
+.achievement-plain::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+    font-weight: bold;
+    opacity: 0.6;
+}
+
+/* Technologies - Highlighted */
+.technologies-section {
+    margin-bottom: 0;
+}
+
+.tech-header {
+    color: var(--tertiary-accent);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    display: inline-block;
+}
+
+.tech-header::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--tertiary-accent), var(--secondary-accent));
+    border-radius: 1px;
+}
+
+.tech-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.tech-badge-glow {
+    background: color-mix(in srgb, var(--tertiary-accent), transparent 85%);
+    color: var(--tertiary-accent);
+    border: var(--border-width-thin) solid color-mix(in srgb, var(--tertiary-accent), transparent 70%);
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tech-badge-glow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            color-mix(in srgb, var(--tertiary-accent), transparent 80%),
+            transparent);
+    transition: left 0.4s ease;
+}
+
+.tech-badge-glow:hover {
+    background: color-mix(in srgb, var(--tertiary-accent), transparent 75%);
+    transform: translateY(-2px);
+    box-shadow:
+        0 8px 25px color-mix(in srgb, var(--tertiary-accent), transparent 70%),
+        0 0 20px color-mix(in srgb, var(--tertiary-accent), transparent 60%);
+    border-color: var(--tertiary-accent);
+}
+
+.tech-badge-glow:hover::before {
+    left: 100%;
+}
+
+/* Stats Overlay */
+.stats-overlay-glass {
+    background: color-mix(in srgb, var(--default-color), transparent 97%);
+    border: var(--border-width-thin) solid color-mix(in srgb, var(--default-color), transparent 90%);
+    border-radius: var(--border-radius-xl);
+    padding: 3rem 2rem;
+    backdrop-filter: var(--btn-glass-backdrop);
+    box-shadow:
+        0 8px 32px color-mix(in srgb, var(--contrast-color), transparent 70%),
+        inset 0 1px 0 color-mix(in srgb, var(--default-color), transparent 90%);
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-overlay-glass::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            var(--accent-color) 20%,
+            var(--tertiary-accent) 50%,
+            var(--secondary-accent) 80%,
+            transparent 100%);
+}
+
+.stat-glass-card {
+    background: color-mix(in srgb, var(--default-color), transparent 95%);
+    border: var(--border-width-thin) solid color-mix(in srgb, var(--default-color), transparent 90%);
+    border-radius: var(--border-radius-medium);
+    padding: 2rem 1rem;
+    backdrop-filter: blur(15px);
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-glass-card:hover {
+    transform: translateY(-5px) scale(1.05);
+    border-color: var(--accent-color);
+    box-shadow:
+        0 15px 40px color-mix(in srgb, var(--accent-color), transparent 80%),
+        inset 0 1px 0 color-mix(in srgb, var(--default-color), transparent 80%);
+}
+
+.stat-number-glow {
+    font-size: 2.5rem;
+    font-weight: 800;
+    font-family: var(--heading-font);
+    background: linear-gradient(135deg,
+            var(--accent-color),
+            var(--tertiary-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 20px var(--glow-green);
+    margin-bottom: 0.5rem;
+}
+
+.stat-label-glass {
+    color: color-mix(in srgb, var(--default-color), transparent 20%);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .section-title-main {
+        font-size: 3rem;
+    }
+
+    .company-name-prominent {
+        font-size: 1.75rem;
+    }
+
+    .position-prominent {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .experience-glass .container-fluid {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .section-header-glass {
+        padding: 2rem 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .section-title-main {
+        font-size: 2.5rem;
+    }
+
+    .section-subtitle-glass {
+        font-size: 1rem;
+    }
+
+    .card-header-glass,
+    .card-body-glass {
+        padding: 1.5rem;
+    }
+
+    .company-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .company-name-prominent {
+        font-size: 1.5rem;
+    }
+
+    .position-prominent {
+        font-size: 1.2rem;
+    }
+
+    .duration-chip {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+        align-self: flex-start;
+    }
+
+    .location-meta {
+        gap: 1rem;
+    }
+
+    .tech-grid {
+        gap: 0.5rem;
+    }
+
+    .tech-badge-glow {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    .stats-overlay-glass {
+        padding: 2rem 1rem;
+    }
+
+    .stat-glass-card {
+        padding: 1.5rem 0.75rem;
+    }
+
+    .stat-number-glow {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .section-title-main {
+        font-size: 2rem;
+    }
+
+    .company-name-prominent {
+        font-size: 1.3rem;
+    }
+
+    .position-prominent {
+        font-size: 1.1rem;
+    }
+
+    .achievement-plain {
+        font-size: 0.85rem;
+    }
+
+    .stat-number-glow {
+        font-size: 1.75rem;
+    }
+
+    .stat-label-glass {
+        font-size: 0.8rem;
+    }
+}
+
+/* Animation Enhancements */
+@media (prefers-reduced-motion: no-preference) {
+
+    .experience-card-glass,
+    .experience-card-featured {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .experience-card-glass:nth-child(even),
+    .experience-card-featured:nth-child(even) {
+        animation-delay: -3s;
+    }
+
+    .tech-badge-glow {
+        animation: subtleShimmer 3s ease-in-out infinite;
+    }
+}

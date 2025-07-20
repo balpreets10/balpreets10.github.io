@@ -1,0 +1,204 @@
+/**
+ * Enhanced Gaming Portfolio CSS Variables - Core design tokens
+ */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800;900');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide:wght@400');
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;600;700');
+@import url('https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Faster+One:wght@300;400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P:wght@300;400;500;600;700;800&display=swap');
+
+/* Fonts */
+:root {
+    --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --heading-font: "Orbitron", sans-serif;
+    --heading2-font: "Rajdhani";
+    --heading3-font: "Ubuntu";
+    --heading4-font: "Rajdhani";
+    --heading5-font: "Saira Condensed";
+    --heading6-font: "Ubuntu";
+
+    --nav-font: "Nunito", "Rajdhani", sans-serif;
+    --code-font: "Fira Code", "Consolas", monospace;
+}
+
+/* Enhanced Gaming Color Palette */
+:root {
+    /* --background-color: #140d2a; */
+    --background-color: #16213e;
+    /* --background-color: linear-gradient(120deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%); */
+
+
+    --surface-color: #1e7345;
+    --surface-light: #4d966f;
+    --surface-dark: #053a1e;
+
+    /* Primary Colors */
+    --default-color: #d9e2dd;
+    --contrast-color: #000000;
+
+
+    /* heading Colors */
+    --heading-color: #ffffff;
+    --heading2-color: #ffffff;
+    --heading3-color: #ffffff;
+    --heading4-color: #ffffff;
+    --heading5-color: #ffffff;
+    --heading6-color: #ffffff;
+
+    /* Gaming Accent Colors */
+    --accent-color: #38ac5f;
+    /* Glass Green */
+    --secondary-accent: #ff0080;
+    /* Magenta Pink */
+    --tertiary-accent: #00d4ff;
+    /* Neon Blue */
+    --quaternary-accent: #ffff00;
+    /* Electric Yellow */
+
+    /* Gaming UI Colors */
+    --success-color: #00ff9f;
+    --warning-color: #ff6b00;
+    --error-color: #ff0040;
+    --info-color: #00d4ff;
+
+    /* Advanced Gaming Colors */
+    --glow-green: rgba(0, 255, 159, 0.3);
+    --glow-blue: rgba(0, 212, 255, 0.3);
+    --glow-magenta: rgba(255, 0, 128, 0.3);
+    --glow-yellow: rgba(255, 255, 0, 0.3);
+
+    /* Shadows & Effects */
+    --box-shadow-color: rgba(0, 255, 159, 0.2);
+    --box-shadow-color2: rgba(255, 0, 128, 0.2);
+    --box-shadow-color3: rgba(0, 212, 255, 0.2);
+
+    /* Borders & Inputs */
+    --border-color: #f0dd2b;
+    --card-border-color: #2b6b40;
+    --input-bg: #1a1a2e;
+    --input-border: #00ff9f;
+    --input-focus: #00d4ff;
+
+    /* New border width variables */
+    --border-width-thin: 1px;
+    --border-width-normal: 2px;
+    --border-width-medium: 3px;
+    --border-width-thick: 4px;
+    --border-width-extra-thick: 6px;
+
+    /* Border radius variables */
+    --border-radius-small: 6px;
+    --border-radius-normal: 8px;
+    --border-radius-medium: 12px;
+    --border-radius-large: 16px;
+    --border-radius-xl: 20px;
+
+    /* Gaming border effects */
+    --border-glow: 0 0 15px;
+    --border-glow-intense: 0 0 25px;
+    --border-glow-strong: 0 0 35px;
+
+    /* Glassy Button System */
+    --btn-glass-bg: rgba(0, 255, 159, 0.1);
+    --btn-glass-border: rgba(0, 255, 159, 0.3);
+    --btn-glass-hover-bg: rgba(0, 255, 159, 0.2);
+    --btn-glass-backdrop: blur(15px);
+    --btn-glass-shadow: 0 8px 32px rgba(0, 255, 159, 0.2);
+    --btn-glass-hover-shadow: 0 12px 40px rgba(0, 255, 159, 0.4);
+
+    /* Secondary Glass Button */
+    --btn-glass-secondary-bg: rgba(255, 0, 128, 0.1);
+    --btn-glass-secondary-border: rgba(255, 0, 128, 0.3);
+    --btn-glass-secondary-hover-bg: rgba(255, 0, 128, 0.2);
+    --btn-glass-secondary-shadow: 0 8px 32px rgba(255, 0, 128, 0.2);
+    --btn-glass-secondary-hover-shadow: 0 12px 40px rgba(255, 0, 128, 0.4);
+
+}
+
+/* Nav Menu Colors */
+:root {
+    --nav-color: #e0e6ff;
+    --nav-hover-color: #00ff9f;
+    --nav-mobile-background-color: #1a1a2e;
+    --nav-dropdown-background-color: #16213e;
+    --nav-dropdown-color: #e0e6ff;
+    --nav-dropdown-hover-color: #00ff9f;
+}
+
+/* Gaming Theme Presets */
+.neon-cyber-theme {
+    --background-color: #0a0a0f;
+    --surface-color: #1a1a2e;
+    --accent-color: #00ff9f;
+    --secondary-accent: #ff0080;
+    --tertiary-accent: #00d4ff;
+    --box-shadow-color: rgba(0, 255, 159, 0.3);
+    --box-shadow-color2: rgba(255, 0, 128, 0.3);
+    --box-shadow-color3: rgba(0, 212, 255, 0.3);
+}
+
+.retro-synthwave-theme {
+    --background-color: #1a0d2e;
+    --surface-color: #2e1a47;
+    --accent-color: #ff6b35;
+    --secondary-accent: #ff0080;
+    --tertiary-accent: #00d4ff;
+    --box-shadow-color: rgba(255, 107, 53, 0.3);
+    --box-shadow-color2: rgba(255, 0, 128, 0.3);
+    --box-shadow-color3: rgba(0, 212, 255, 0.3);
+}
+
+.matrix-hacker-theme {
+    --background-color: #000000;
+    --surface-color: #001100;
+    --accent-color: #00ff41;
+    --secondary-accent: #00ff9f;
+    --tertiary-accent: #00d4ff;
+    --default-color: #00ff41;
+    --box-shadow-color: rgba(0, 255, 65, 0.3);
+    --box-shadow-color2: rgba(0, 255, 159, 0.3);
+    --box-shadow-color3: rgba(0, 212, 255, 0.3);
+}
+
+.cyberpunk-theme {
+    --background-color: #0d0208;
+    --surface-color: #1a0f1a;
+    --accent-color: #00f5ff;
+    --secondary-accent: #ffbe0b;
+    --tertiary-accent: #ff0080;
+    --box-shadow-color: rgba(0, 245, 255, 0.3);
+    --box-shadow-color2: rgba(255, 190, 11, 0.3);
+    --box-shadow-color3: rgba(255, 0, 128, 0.3);
+}
+
+.gaming-rgb-theme {
+    --background-color: #0a0a0a;
+    --surface-color: #1a1a1a;
+    --accent-color: #00ff9f;
+    --secondary-accent: #ff0080;
+    --tertiary-accent: #00d4ff;
+    --quaternary-accent: #ffff00;
+    --box-shadow-color: rgba(0, 255, 159, 0.25);
+    --box-shadow-color2: rgba(255, 0, 128, 0.25);
+    --box-shadow-color3: rgba(0, 212, 255, 0.25);
+}
+
+/* Animation Variables */
+:root {
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.6s ease;
+    --bounce-effect: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Smooth scroll */
+:root {
+    scroll-behavior: smooth;
+}
