@@ -3,7 +3,7 @@
     position: fixed;
     visibility: hidden;
     opacity: 0;
-    right: 15px;
+    left: 15px;
     bottom: -15px;
     z-index: 99999;
 
@@ -22,7 +22,7 @@
 
     /* Initial glow */
     box-shadow:
-        0 0 25px var(--glow-green),
+        0 0 10px var(--accent-color-dark),
         inset 0 0 25px rgba(0, 255, 159, 0.1);
 
     /* Ensure flex centering */
@@ -44,9 +44,10 @@
     visibility: visible;
     opacity: 1;
     bottom: 15px;
-
     /* Apply the color shift animation */
-    animation: borderColorShift 4s ease-in-out infinite;
+    /* animation: borderColorShift 4s ease-in-out infinite; */
+
+    animation: matrixReveal 1s ease-in-out, scrollTopEntrance 1s ease-out;
 }
 
 /* Enhanced arrow icon styling */
@@ -127,13 +128,6 @@
     }
 }
 
-/* Enhanced entrance animation */
-.scroll-top.active {
-    animation:
-        borderColorShift 4s ease-in-out infinite,
-        scrollTopEntrance 0.5s ease-out;
-}
-
 @keyframes scrollTopEntrance {
     0% {
         transform: scale(0.5) rotate(-180deg);
@@ -153,9 +147,9 @@
 /* Mobile optimizations */
 @media (max-width: 768px) {
     .scroll-top {
-        width: 50px;
-        height: 50px;
-        right: 20px;
+        width: 60px;
+        height: 60px;
+        left: 20px;
     }
 
     .scroll-top i {
@@ -192,5 +186,14 @@
 
     .scroll-top:hover {
         transform: none;
+    }
+}
+
+/* Mobile optimizations */
+@media (max-width: 576px) {
+    .scroll-top {
+        width: 50px;
+        height: 50px;
+        left: 20px;
     }
 }

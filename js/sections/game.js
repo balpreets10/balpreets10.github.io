@@ -1,92 +1,137 @@
 /**
- * Game Section - Unity WebGL Game Integration
- * Follows the portfolio.js pattern for consistent section structure
+ * Enhanced Game Section - Sleek Multi-Engine Game Portfolio
+ * Showcases interactive resume experiences across different game engines
  */
 class GameSection {
     constructor() {
-        this.config = {
-            title: "Interactive Resume Experience",
-            subtitle: "Dive into my Unity-powered portfolio game. Experience my professional journey through an interactive Unity game. Navigate through different levels representing my skills, projects, and achievements in an immersive 3D environment designed to showcase my game development expertise.",
-            features: [
-                "3D Navigation",
-                "Interactive Portfolio",
-                "Real-time Rendering",
-                "Cross-platform",
-                "WebGL Optimized",
-                "Responsive Design"
-            ],
-            gameInfo: {
-                status: "ready", // ready, loading, playing, error
-                progress: 0,
-                canFullscreen: true,
-                isLoaded: false,
-                isPlaying: false,
-                isFullscreen: false
-            },
-            buttons: [
-                {
-                    id: "play-btn",
-                    class: "game-control-btn play-btn",
-                    icon: "fas fa-play",
-                    text: "Play",
-                    tooltip: "Start Game",
-                    action: "play",
-                    primary: true
-                },
-                {
-                    id: "fullscreen-btn",
-                    class: "game-control-btn fullscreen-btn",
-                    icon: "fas fa-expand",
-                    text: "Fullscreen",
-                    tooltip: "Toggle Fullscreen",
-                    action: "fullscreen",
-                    disabled: true
-                },
-                {
-                    id: "reload-btn",
-                    class: "game-control-btn reload-btn",
-                    icon: "fas fa-sync-alt",
-                    text: "Reload",
-                    tooltip: "Reload Game",
-                    action: "reload",
-                    disabled: true
-                },
-                {
-                    id: "info-btn",
-                    class: "game-control-btn info-btn",
-                    icon: "fas fa-info-circle",
-                    text: "Info",
-                    tooltip: "Game Information",
-                    action: "info"
-                }
-            ],
-            placeholderContent: {
-                icon: "fas fa-gamepad",
-                title: "Unity Game Ready",
-                description: "Click the Play button to start the interactive experience and explore my portfolio in 3D"
-            },
-            unityConfig: {
-                buildUrl: "game/Build",
-                dataUrl: "game/Build/Web.data.gz",
-                frameworkUrl: "game/Build/Web.framework.js.gz",
-                codeUrl: "game/Build/Web.wasm.gz",
-                streamingAssetsUrl: "game/StreamingAssets",
-                companyName: "Gaming Portfolio",
-                productName: "Interactive Resume",
-                productVersion: "1.0.0"
-            }
-        };
-
+        this.config = null;
         this.gameContainer = null;
-        this.unityInstance = null;
         this.isInitialized = false;
+        this.isDataLoaded = false;
+        this.dataPath = 'data/game-data.json';
 
-        // Bind methods to preserve context
-        this.handleButtonClick = this.handleButtonClick.bind(this);
-        this.handlePlay = this.handlePlay.bind(this);
-        this.handleFullscreen = this.handleFullscreen.bind(this);
-        this.handleReload = this.handleReload.bind(this);
-        this.handleInfo = this.handleInfo.bind(this);
+        // Bind methods
+        this.handleEngineClick = this.handleEngineClick.bind(this);
+        this.enableEngine = this.enableEngine.bind(this);
+        this.disableEngine = this.disableEngine.bind(this);
+        this.loadGameData = this.loadGameData.bind(this);
+    }
+
+    async loadGameData(dataPath = null) {
+        const path = dataPath || this.dataPath;
+        try {
+            console.log(`Loading game data from: ${path}`);
+            const response = await fetch(path);
+
+            if (!response.ok) {
+                throw new Error(`Failed to load game data: ${response.status}`);
+            }
+
+            const data = await response.json();
+            this.config = data;
+            this.isDataLoaded = true;
+            console.log('Game data loaded successfully');
+            return true;
+        } catch (error) {
+            console.error('Error loading game data:', error);
+
+            // Fallback to minimal config
+            this.config = {
+                title: "Interactive Resume Experience",
+                subtitle: "Game configuration could not be loaded. Please check the data file.",
+                features: ["Configuration Error"],
+                engines: []
+            };
+            this.isDataLoaded = true;
+            return false;
+        }
+    }
+
+    async loadDataAndUpdate() {
+        const success = await this.loadGameData();
+
+        if (success || this.isDataLoaded) {
+            const grid = document.getElementById('enginesGrid');
+            if (grid) {
+                this.renderEnginesGrid(grid);
+                setTimeout(() => {
+                    this.setupEventHandlers();
+                }, 100);
+            }
+            this.updateSectionHeader();
+        } else {
+            const grid = document.getElementById('enginesGrid');
+            if (grid) {
+                grid.innerHTML = `
+                    <div class="engines-error">
+                        <div class="error-content">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <p>Failed to load game engines. Please try refreshing the page.</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+    }
+
+    renderEnginesGrid(container) {
+        container.innerHTML = '';
+
+        if (!this.config?.engines || this.config.engines.length === 0) {
+            container.innerHTML = `
+                <div class="engines-empty">
+                    <div class="empty-content">
+                        <i class="fas fa-gamepad"></i>
+                        <p>No game engines available at the moment.</p>
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        this.config.engines.forEach((engine, index) => {
+            const engineButton = this.createEngineButton(engine, index);
+            container.appendChild(engineButton);
+        });
+    }
+
+    updateSectionHeader() {
+        const titleElement = document.querySelector('#game .section-title');
+        const subtitleElement = document.querySelector('#game .section-subtitle');
+
+        if (titleElement && this.config?.title) {
+            titleElement.innerHTML = `
+                <i class="fas fa-gamepad title-icon"></i>
+                ${this.config.title}
+            `;
+        }
+
+        if (subtitleElement && this.config?.subtitle) {
+            subtitleElement.textContent = this.config.subtitle;
+        }
+
+        const featuresContainer = document.querySelector('#game .game-features');
+        if (featuresContainer && this.config?.features) {
+            featuresContainer.innerHTML = '';
+            // this.config.features.forEach((feature, index) => {
+            const tag = document.createElement('span');
+            tag.className = 'feature-tag';
+            tag.textContent = "Ready";
+            tag.setAttribute('data-aos', 'zoom-in');
+            tag.setAttribute('data-aos-delay', 50 + (index * 50));
+            featuresContainer.appendChild(tag);
+            // });
+        }
+
+
+    }
+
+    async initialize(dataPath = null) {
+        console.log('Multi-Engine Game section initializing...');
+        await this.loadDataAndUpdate();
+        this.isInitialized = true;
+        this.setupKeyboardShortcuts();
+        console.log('Multi-Engine Game section initialized');
     }
 
     createSectionHeader() {
@@ -94,12 +139,19 @@ class GameSection {
         header.className = 'section-header';
         header.setAttribute('data-aos', 'fade-down');
 
+        const title = this.isDataLoaded ? (this.config?.title || 'Interactive Resume Experience') : 'Interactive Resume Experience';
+        const subtitle = this.isDataLoaded ? (this.config?.subtitle || 'Loading game configuration...') : 'Loading game configuration...';
+
         header.innerHTML = `
             <div class="title-container">
-                <h2 class="section-title">${this.config.title}</h2>
+                <h2 class="section-title">
+                    <i class="fas fa-gamepad title-icon"></i>
+                    ${title}
+                </h2>
+                <div class="scan-line"></div>
             </div>
             <div class="header-divider"></div>
-            <p class="section-subtitle">${this.config.subtitle}</p>
+            <p class="section-subtitle">${subtitle}</p>
         `;
 
         return header;
@@ -109,7 +161,7 @@ class GameSection {
         const infoStrip = document.createElement('div');
         infoStrip.className = 'game-info-strip';
         infoStrip.setAttribute('data-aos', 'fade-up');
-        infoStrip.setAttribute('data-aos-delay', '200');
+        infoStrip.setAttribute('data-aos-delay', '100');
 
         const content = document.createElement('div');
         content.className = 'game-info-content';
@@ -117,135 +169,176 @@ class GameSection {
         const featuresContainer = document.createElement('div');
         featuresContainer.className = 'game-features';
 
-        this.config.features.forEach((feature, index) => {
-            const tag = document.createElement('span');
-            tag.className = 'feature-tag';
-            tag.textContent = feature;
-            tag.setAttribute('data-aos', 'zoom-in');
-            tag.setAttribute('data-aos-delay', 300 + (index * 50));
-            featuresContainer.appendChild(tag);
-        });
+        if (!this.isDataLoaded) {
+            const loadingTag = document.createElement('span');
+            loadingTag.className = 'feature-tag';
+            loadingTag.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+            featuresContainer.appendChild(loadingTag);
+        } else {
+            const features = this.config?.features || ['No features available'];
+            features.forEach((feature, index) => {
+                const tag = document.createElement('span');
+                tag.className = 'feature-tag';
+                tag.textContent = feature;
+                tag.setAttribute('data-aos', 'zoom-in');
+                tag.setAttribute('data-aos-delay', 100 + (index * 50));
+                featuresContainer.appendChild(tag);
+            });
+        }
 
         content.appendChild(featuresContainer);
         infoStrip.appendChild(content);
-
         return infoStrip;
     }
 
-    createGameControls() {
-        const controls = document.createElement('div');
-        controls.className = 'game-controls';
+    createEngineButton(engine, index) {
+        const button = document.createElement('div');
+        button.className = `engine-button ${engine.status}`;
+        button.id = `engine-${engine.id}`;
+        button.setAttribute('data-engine', engine.id);
+        button.setAttribute('data-status', engine.status);
+        button.setAttribute('data-aos', 'zoom-in');
+        button.setAttribute('data-aos-delay', 200 + (index * 100));
 
-        this.config.buttons.forEach((buttonConfig, index) => {
-            const button = document.createElement('button');
-            button.id = buttonConfig.id;
-            button.className = buttonConfig.class;
-            button.setAttribute('data-tooltip', buttonConfig.tooltip);
-            button.setAttribute('data-action', buttonConfig.action);
+        // Status indicator
+        const statusIndicator = document.createElement('div');
+        statusIndicator.className = 'status-indicator';
 
-            if (buttonConfig.disabled) {
-                button.disabled = true;
-            }
+        let statusText = '';
+        let statusIcon = '';
+        switch (engine.status) {
+            case 'available':
+                statusText = 'Ready to Play';
+                statusIcon = 'fas fa-play-circle';
+                break;
+            case 'coming-soon':
+                statusText = 'Coming Soon';
+                statusIcon = 'fas fa-clock';
+                break;
+            case 'disabled':
+                statusText = 'Maintenance';
+                statusIcon = 'fas fa-tools';
+                break;
+        }
 
-            const icon = document.createElement('i');
-            icon.className = buttonConfig.icon;
+        statusIndicator.innerHTML = `
+            <i class="${statusIcon}"></i>
+            <span>${statusText}</span>
+        `;
 
-            const text = document.createElement('span');
-            text.className = 'btn-text';
-            text.textContent = buttonConfig.text;
+        // Engine content - simplified structure
+        const content = document.createElement('div');
+        content.className = 'engine-content';
 
-            button.appendChild(icon);
-            button.appendChild(text);
+        const header = document.createElement('div');
+        header.className = 'engine-header';
 
-            // Add click event listener
-            button.addEventListener('click', this.handleButtonClick);
+        const logo = document.createElement('div');
+        logo.className = 'engine-logo';
+        logo.innerHTML = `<i class="${engine.logo}"></i>`;
 
-            // Add AOS animation
-            button.setAttribute('data-aos', 'zoom-in');
-            button.setAttribute('data-aos-delay', 400 + (index * 100));
+        const info = document.createElement('div');
+        info.className = 'engine-info';
 
-            controls.appendChild(button);
-        });
+        const name = document.createElement('h3');
+        name.className = 'engine-name';
+        name.textContent = engine.name;
 
-        return controls;
-    }
+        // const description = document.createElement('p');
+        // description.className = 'engine-description';
+        // description.textContent = engine.description;
 
-    createUnityGameArea() {
-        const gameArea = document.createElement('div');
-        gameArea.className = 'unity-game-area';
-        gameArea.id = 'unity-game-container';
+        info.appendChild(name);
+        // info.appendChild(description);
+        header.appendChild(logo);
+        header.appendChild(info);
 
-        // Create placeholder content
-        const placeholder = this.createGamePlaceholder();
-        gameArea.appendChild(placeholder);
+        // Action area
+        const actionArea = document.createElement('div');
+        actionArea.className = 'engine-action';
 
-        return gameArea;
-    }
+        const playButton = document.createElement('button');
+        playButton.className = 'play-button';
+        playButton.innerHTML = `
+            <i class="fas fa-external-link-alt"></i>
+            <span>Launch Game</span>
+        `;
 
-    createGamePlaceholder() {
-        const placeholder = document.createElement('div');
-        placeholder.className = 'game-placeholder';
-        placeholder.id = 'game-placeholder';
+        actionArea.appendChild(playButton);
 
-        const icon = document.createElement('i');
-        icon.className = `${this.config.placeholderContent.icon} placeholder-icon`;
+        // Assemble content - only header and action
+        content.appendChild(header);
+        content.appendChild(actionArea);
 
-        const title = document.createElement('h3');
-        title.className = 'placeholder-title';
-        title.textContent = this.config.placeholderContent.title;
+        // Effects
+        const glowEffect = document.createElement('div');
+        glowEffect.className = 'engine-glow';
 
-        const description = document.createElement('p');
-        description.className = 'placeholder-description';
-        description.textContent = this.config.placeholderContent.description;
+        const particles = document.createElement('div');
+        particles.className = 'engine-particles';
+        for (let i = 0; i < 6; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particles.appendChild(particle);
+        }
 
-        placeholder.appendChild(icon);
-        placeholder.appendChild(title);
-        placeholder.appendChild(description);
+        button.appendChild(statusIndicator);
+        button.appendChild(content);
+        button.appendChild(glowEffect);
+        button.appendChild(particles);
 
-        return placeholder;
+        // Set custom properties for engine colors
+        button.style.setProperty('--engine-color', engine.color);
+        button.style.setProperty('--engine-glow', engine.glowColor);
+
+        button.addEventListener('click', () => this.handleEngineClick(engine));
+        return button;
     }
 
     createGameContainer() {
         const container = document.createElement('div');
-        container.className = 'game-container';
+        container.className = 'games-showcase-container';
         container.setAttribute('data-aos', 'fade-up');
-        container.setAttribute('data-aos-delay', '300');
+        container.setAttribute('data-aos-delay', '200');
 
-        const controls = this.createGameControls();
-        const gameArea = this.createUnityGameArea();
+        const screenContainer = document.createElement('div');
+        screenContainer.className = 'games-screen';
 
-        container.appendChild(controls);
-        container.appendChild(gameArea);
+        const screenHeader = document.createElement('div');
+        screenHeader.className = 'screen-header';
+        screenHeader.innerHTML = `
+            <div class="screen-title">
+                <i class="fas fa-desktop"></i>
+                <span>Select Game Engine</span>
+            </div>
+            <div class="screen-status">
+                <div class="status-dot"></div>
+                <span>Systems Online</span>
+            </div>
+        `;
 
+        const enginesGrid = document.createElement('div');
+        enginesGrid.className = 'engines-grid';
+        enginesGrid.id = 'enginesGrid';
+
+        if (!this.isDataLoaded) {
+            const loadingMessage = document.createElement('div');
+            loadingMessage.className = 'loading-message';
+            loadingMessage.innerHTML = `
+                <div class="loading-content">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Loading game engines...</p>
+                </div>
+            `;
+            enginesGrid.appendChild(loadingMessage);
+        } else {
+            this.renderEnginesGrid(enginesGrid);
+        }
+
+        screenContainer.appendChild(screenHeader);
+        screenContainer.appendChild(enginesGrid);
+        container.appendChild(screenContainer);
         return container;
-    }
-
-    createLoadingState() {
-        const loading = document.createElement('div');
-        loading.className = 'game-loading';
-        loading.id = 'game-loading';
-        loading.style.display = 'none';
-
-        const icon = document.createElement('i');
-        icon.className = 'fas fa-spinner loading-icon';
-
-        const text = document.createElement('div');
-        text.className = 'loading-text';
-        text.textContent = 'Loading Game...';
-
-        const progressContainer = document.createElement('div');
-        progressContainer.className = 'loading-progress';
-
-        const progressBar = document.createElement('div');
-        progressBar.className = 'progress-bar';
-        progressBar.id = 'game-progress-bar';
-
-        progressContainer.appendChild(progressBar);
-        loading.appendChild(icon);
-        loading.appendChild(text);
-        loading.appendChild(progressContainer);
-
-        return loading;
     }
 
     render() {
@@ -262,7 +355,6 @@ class GameSection {
         const col = document.createElement('div');
         col.className = 'col-12';
 
-        // Assemble all components
         const header = this.createSectionHeader();
         const infoStrip = this.createGameInfoStrip();
         const gameContainer = this.createGameContainer();
@@ -275,345 +367,142 @@ class GameSection {
         container.appendChild(row);
         section.appendChild(container);
 
-        // Store reference to game container
-        this.gameContainer = gameContainer.querySelector('#unity-game-container');
-
+        this.gameContainer = gameContainer;
         return section;
     }
 
-    handleButtonClick(event) {
-        const action = event.currentTarget.getAttribute('data-action');
-        const button = event.currentTarget;
+    handleEngineClick(engine) {
+        console.log(`Engine clicked: ${engine.name}`);
+        const button = document.getElementById(`engine-${engine.id}`);
 
-        // Prevent multiple clicks
-        if (button.disabled) return;
-
-        // Add click animation
-        button.style.transform = 'scale(0.95)';
+        button.style.transform = 'scale(0.98)';
         setTimeout(() => {
             button.style.transform = '';
         }, 150);
 
-        // Handle different actions
-        switch (action) {
-            case 'play':
-                this.handlePlay();
+        switch (engine.status) {
+            case 'available':
+                this.launchGame(engine);
                 break;
-            case 'fullscreen':
-                this.handleFullscreen();
+            case 'coming-soon':
+                this.showComingSoonModal(engine);
                 break;
-            case 'reload':
-                this.handleReload();
+            case 'disabled':
+                this.showMaintenanceModal(engine);
                 break;
-            case 'info':
-                this.handleInfo();
-                break;
-            default:
-                console.warn(`Unknown action: ${action}`);
         }
     }
 
-    handlePlay() {
-        console.log('Play button clicked');
+    launchGame(engine) {
+        console.log(`Launching ${engine.name} game...`);
+        const button = document.getElementById(`engine-${engine.id}`);
+        button.classList.add('launching');
 
-        if (!this.config.gameInfo.isLoaded) {
-            this.showLoadingState();
-            this.loadUnityGame();
-        } else if (!this.config.gameInfo.isPlaying) {
-            this.resumeGame();
-        } else {
-            this.pauseGame();
+        setTimeout(() => {
+            window.open(engine.gameUrl, '_blank', 'noopener,noreferrer');
+            button.classList.remove('launching');
+        }, 800);
+    }
+
+    showComingSoonModal(engine) {
+        console.log(`${engine.name} coming soon...`);
+        alert(`${engine.name} experience is coming soon! Stay tuned for updates.`);
+    }
+
+    showMaintenanceModal(engine) {
+        console.log(`${engine.name} under maintenance...`);
+        alert(`${engine.name} is currently under maintenance. Please try again later.`);
+    }
+
+    // Engine control methods
+    enableEngine(engineId) {
+        const engine = this.config?.engines?.find(e => e.id === engineId);
+        if (engine) {
+            engine.status = 'available';
+            this.updateEngineButton(engineId);
+            console.log(`${engine.name} enabled`);
         }
     }
 
-    handleFullscreen() {
-        console.log('Fullscreen button clicked');
-
-        if (!this.config.gameInfo.isFullscreen) {
-            this.enterFullscreen();
-        } else {
-            this.exitFullscreen();
+    disableEngine(engineId) {
+        const engine = this.config?.engines?.find(e => e.id === engineId);
+        if (engine) {
+            engine.status = 'disabled';
+            this.updateEngineButton(engineId);
+            console.log(`${engine.name} disabled`);
         }
     }
 
-    handleReload() {
-        console.log('Reload button clicked');
-
-        if (this.config.gameInfo.isLoaded) {
-            this.reloadGame();
+    setEngineComingSoon(engineId) {
+        const engine = this.config?.engines?.find(e => e.id === engineId);
+        if (engine) {
+            engine.status = 'coming-soon';
+            this.updateEngineButton(engineId);
+            console.log(`${engine.name} set to coming soon`);
         }
     }
 
-    handleInfo() {
-        console.log('Info button clicked');
-        this.showGameInfo();
-    }
+    updateEngineButton(engineId) {
+        const button = document.getElementById(`engine-${engineId}`);
+        const engine = this.config?.engines?.find(e => e.id === engineId);
 
-    showLoadingState() {
-        const placeholder = document.getElementById('game-placeholder');
-        if (placeholder) {
-            placeholder.style.display = 'none';
-        }
+        if (button && engine) {
+            button.className = `engine-button ${engine.status}`;
+            button.setAttribute('data-status', engine.status);
 
-        // Create and show loading state
-        const gameArea = this.gameContainer;
-        const loading = this.createLoadingState();
-        loading.style.display = 'block';
-        gameArea.appendChild(loading);
+            const statusIndicator = button.querySelector('.status-indicator');
+            let statusText = '';
+            let statusIcon = '';
 
-        // Update button states
-        this.updateButtonStates({
-            play: { disabled: true, text: 'Loading...', icon: 'fas fa-spinner fa-spin' }
-        });
-    }
-
-    hideLoadingState() {
-        const loading = document.getElementById('game-loading');
-        if (loading) {
-            loading.remove();
-        }
-    }
-
-    loadUnityGame() {
-        // Simulate loading for now
-        console.log('Starting Unity game load...');
-
-        let progress = 0;
-        const progressBar = document.getElementById('game-progress-bar');
-
-        const loadingInterval = setInterval(() => {
-            progress += Math.random() * 15;
-            if (progress >= 100) {
-                progress = 100;
-                clearInterval(loadingInterval);
-                this.onGameLoaded();
-            }
-
-            if (progressBar) {
-                progressBar.style.width = `${progress}%`;
-            }
-
-            this.config.gameInfo.progress = progress;
-        }, 200);
-    }
-
-    onGameLoaded() {
-        console.log('Game loaded successfully');
-
-        this.hideLoadingState();
-        this.config.gameInfo.isLoaded = true;
-        this.config.gameInfo.isPlaying = true;
-        this.config.gameInfo.status = 'playing';
-
-        // Show game content (placeholder for now)
-        const placeholder = document.getElementById('game-placeholder');
-        if (placeholder) {
-            placeholder.querySelector('.placeholder-title').textContent = 'Game Running';
-            placeholder.querySelector('.placeholder-description').textContent = 'Unity game is now active and running';
-            placeholder.querySelector('.placeholder-icon').className = 'fas fa-play-circle placeholder-icon';
-            placeholder.style.display = 'block';
-        }
-
-        // Update button states
-        this.updateButtonStates({
-            play: { disabled: false, text: 'Pause', icon: 'fas fa-pause' },
-            fullscreen: { disabled: false },
-            reload: { disabled: false }
-        });
-    }
-
-    resumeGame() {
-        console.log('Resuming game');
-        this.config.gameInfo.isPlaying = true;
-        this.updateButtonStates({
-            play: { text: 'Pause', icon: 'fas fa-pause' }
-        });
-    }
-
-    pauseGame() {
-        console.log('Pausing game');
-        this.config.gameInfo.isPlaying = false;
-        this.updateButtonStates({
-            play: { text: 'Play', icon: 'fas fa-play' }
-        });
-    }
-
-    enterFullscreen() {
-        console.log('Entering fullscreen');
-        // Fullscreen logic will be implemented with Unity
-        this.config.gameInfo.isFullscreen = true;
-        this.updateButtonStates({
-            fullscreen: { text: 'Exit Fullscreen', icon: 'fas fa-compress' }
-        });
-    }
-
-    exitFullscreen() {
-        console.log('Exiting fullscreen');
-        this.config.gameInfo.isFullscreen = false;
-        this.updateButtonStates({
-            fullscreen: { text: 'Fullscreen', icon: 'fas fa-expand' }
-        });
-    }
-
-    reloadGame() {
-        console.log('Reloading game');
-
-        // Reset game state
-        this.config.gameInfo.isLoaded = false;
-        this.config.gameInfo.isPlaying = false;
-        this.config.gameInfo.progress = 0;
-        this.config.gameInfo.status = 'ready';
-
-        // Reset UI
-        const placeholder = document.getElementById('game-placeholder');
-        if (placeholder) {
-            placeholder.querySelector('.placeholder-title').textContent = this.config.placeholderContent.title;
-            placeholder.querySelector('.placeholder-description').textContent = this.config.placeholderContent.description;
-            placeholder.querySelector('.placeholder-icon').className = `${this.config.placeholderContent.icon} placeholder-icon`;
-        }
-
-        // Reset button states
-        this.updateButtonStates({
-            play: { disabled: false, text: 'Play', icon: 'fas fa-play' },
-            fullscreen: { disabled: true, text: 'Fullscreen', icon: 'fas fa-expand' },
-            reload: { disabled: true }
-        });
-    }
-
-    showGameInfo() {
-        // This would open a modal or info panel
-        console.log('Showing game info');
-
-        const info = {
-            title: this.config.title,
-            features: this.config.features,
-            status: this.config.gameInfo.status,
-            isLoaded: this.config.gameInfo.isLoaded,
-            progress: this.config.gameInfo.progress
-        };
-
-        // For now, just log the info - later this could open a modal
-        console.log('Game Info:', info);
-
-        // Could implement a simple alert for now
-        alert(`Game Status: ${this.config.gameInfo.status}\nLoaded: ${this.config.gameInfo.isLoaded}\nProgress: ${this.config.gameInfo.progress}%`);
-    }
-
-    updateButtonStates(updates) {
-        Object.keys(updates).forEach(buttonType => {
-            const update = updates[buttonType];
-            let buttonId;
-
-            switch (buttonType) {
-                case 'play':
-                    buttonId = 'play-btn';
+            switch (engine.status) {
+                case 'available':
+                    statusText = 'Ready to Play';
+                    statusIcon = 'fas fa-play-circle';
                     break;
-                case 'fullscreen':
-                    buttonId = 'fullscreen-btn';
+                case 'coming-soon':
+                    statusText = 'Coming Soon';
+                    statusIcon = 'fas fa-clock';
                     break;
-                case 'reload':
-                    buttonId = 'reload-btn';
-                    break;
-                case 'info':
-                    buttonId = 'info-btn';
+                case 'disabled':
+                    statusText = 'Maintenance';
+                    statusIcon = 'fas fa-tools';
                     break;
             }
 
-            const button = document.getElementById(buttonId);
-            if (button) {
-                if (update.disabled !== undefined) {
-                    button.disabled = update.disabled;
-                }
-                if (update.text) {
-                    const textSpan = button.querySelector('.btn-text');
-                    if (textSpan) textSpan.textContent = update.text;
-                }
-                if (update.icon) {
-                    const icon = button.querySelector('i');
-                    if (icon) icon.className = update.icon;
-                }
-            }
-        });
+            statusIndicator.innerHTML = `
+                <i class="${statusIcon}"></i>
+                <span>${statusText}</span>
+            `;
+        }
     }
 
-    getGameState() {
-        return { ...this.config.gameInfo };
+    updateEngineUrl(engineId, newUrl) {
+        const engine = this.config?.engines?.find(e => e.id === engineId);
+        if (engine) {
+            engine.gameUrl = newUrl;
+            console.log(`${engine.name} URL updated to: ${newUrl}`);
+        }
     }
 
-    updateGameInfo(updates) {
-        this.config.gameInfo = { ...this.config.gameInfo, ...updates };
-    }
-
-    initialize() {
-        console.log('Game section initialized');
-        this.isInitialized = true;
-
-        // Any additional initialization can go here
-        // For example, setting up intersection observers, resize handlers, etc.
-
-        // Setup responsive behavior
-        this.setupResponsiveHandlers();
-
-        // Setup keyboard shortcuts
-        this.setupKeyboardShortcuts();
-    }
-
-    setupResponsiveHandlers() {
-        // Handle window resize for responsive behavior
-        let resizeTimeout;
+    setupEventHandlers() {
         window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                this.handleResize();
-            }, 250);
+            // Handle responsive adjustments if needed
         });
     }
 
     setupKeyboardShortcuts() {
-        // Setup keyboard shortcuts for game controls
         document.addEventListener('keydown', (event) => {
-            // Only handle shortcuts when game section is visible
             const gameSection = document.getElementById('game');
             if (!gameSection || !this.isElementInViewport(gameSection)) return;
 
-            switch (event.key) {
-                case ' ': // Spacebar for play/pause
-                    event.preventDefault();
-                    this.handlePlay();
-                    break;
-                case 'f':
-                case 'F':
-                    if (event.ctrlKey || event.metaKey) {
-                        event.preventDefault();
-                        this.handleFullscreen();
-                    }
-                    break;
-                case 'r':
-                case 'R':
-                    if (event.ctrlKey || event.metaKey) {
-                        event.preventDefault();
-                        this.handleReload();
-                    }
-                    break;
-                case 'i':
-                case 'I':
-                    if (event.ctrlKey || event.metaKey) {
-                        event.preventDefault();
-                        this.handleInfo();
-                    }
-                    break;
+            if (event.key >= '1' && event.key <= '4') {
+                event.preventDefault();
+                const engineIndex = parseInt(event.key) - 1;
+                if (this.config?.engines && this.config.engines[engineIndex]) {
+                    this.handleEngineClick(this.config.engines[engineIndex]);
+                }
             }
         });
-    }
-
-    handleResize() {
-        // Handle any resize-specific logic
-        console.log('Game section handling resize');
-
-        // If Unity game is loaded, we might need to handle canvas resizing here
-        if (this.unityInstance) {
-            // Unity resize logic would go here
-        }
     }
 
     isElementInViewport(element) {
@@ -626,23 +515,95 @@ class GameSection {
         );
     }
 
-    // Method to update configuration after initialization
+    // Configuration methods
+    setDataPath(path) {
+        this.dataPath = path;
+        console.log(`Game data path set to: ${path}`);
+    }
+
+    async reloadGameData() {
+        if (!this.isInitialized) {
+            console.warn('Game section not initialized');
+            return false;
+        }
+
+        const success = await this.loadGameData();
+        if (success && this.gameContainer) {
+            this.refreshEnginesGrid();
+            this.updateSectionHeader();
+        }
+        return success;
+    }
+
+    refreshEnginesGrid() {
+        const enginesGrid = document.getElementById('enginesGrid');
+        if (enginesGrid && this.config?.engines) {
+            this.renderEnginesGrid(enginesGrid);
+        }
+    }
+
+    async updateGameData(newData) {
+        this.config = { ...this.config, ...newData };
+        this.isDataLoaded = true;
+        const existingSection = document.getElementById('game');
+        if (existingSection) {
+            const newSection = this.render();
+            existingSection.parentNode.replaceChild(newSection, existingSection);
+            await this.initialize();
+        }
+    }
+
+    async refreshData() {
+        this.isDataLoaded = false;
+        this.config = null;
+        await this.loadDataAndUpdate();
+    }
+
+    // Utility methods
+    getEngineStatus(engineId) {
+        const engine = this.config?.engines?.find(e => e.id === engineId);
+        return engine ? engine.status : null;
+    }
+
+    getAllEngines() {
+        return this.config?.engines ? [...this.config.engines] : [];
+    }
+
     updateConfig(newConfig) {
         this.config = { ...this.config, ...newConfig };
         console.log('Game section config updated');
     }
 
-    // Cleanup method for when section is removed
     cleanup() {
-        if (this.unityInstance) {
-            // Clean up Unity instance
-            this.unityInstance.Quit();
-            this.unityInstance = null;
-        }
-
         this.isInitialized = false;
-        console.log('Game section cleaned up');
+        this.isDataLoaded = false;
+        console.log('Multi-Engine Game section cleaned up');
     }
 }
 
+// Global methods
 window.GameSection = GameSection;
+
+window.enableGameEngine = function (engineId) {
+    if (window.gameSection && window.gameSection.enableEngine) {
+        window.gameSection.enableEngine(engineId);
+    }
+};
+
+window.disableGameEngine = function (engineId) {
+    if (window.gameSection && window.gameSection.disableEngine) {
+        window.gameSection.disableEngine(engineId);
+    }
+};
+
+window.setGameEngineComingSoon = function (engineId) {
+    if (window.gameSection && window.gameSection.setEngineComingSoon) {
+        window.gameSection.setEngineComingSoon(engineId);
+    }
+};
+
+window.updateGameEngineUrl = function (engineId, newUrl) {
+    if (window.gameSection && window.gameSection.updateEngineUrl) {
+        window.gameSection.updateEngineUrl(engineId, newUrl);
+    }
+};

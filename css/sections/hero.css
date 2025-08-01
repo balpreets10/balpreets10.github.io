@@ -1,0 +1,667 @@
+/**
+ * Green Gaming Hero Section - Subtle Gaming Aesthetic
+ */
+
+.hero {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+/* Subtle Background Effects */
+.hero .background-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero .background-elements::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 20% 30%, var(--accent-transparent-10) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, var(--tertiary-transparent-10) 0%, transparent 50%);
+    animation: subtleShimmer 5s ease-in-out infinite;
+}
+
+
+
+/* Clean Floating Circles */
+.hero .background-elements .bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--gradient-glass);
+    border: var(--border-width-thin) solid var(--accent-transparent-20);
+    animation: cleanFloat 6s ease-in-out infinite;
+}
+
+.hero .background-elements .bg-circle.circle-1 {
+    width: var(--card-height-sm);
+    height: var(--card-height-sm);
+    top: 10%;
+    right: 10%;
+    animation-delay: 0s;
+}
+
+.hero .background-elements .bg-circle.circle-2 {
+    width: 200px;
+    height: 200px;
+    bottom: 20%;
+    left: 25%;
+    animation-delay: 2s;
+}
+
+/* Simple Particles */
+.hero .background-elements .bg-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    animation: particleFloat 8s linear infinite;
+    box-shadow: 0 0 10px var(--accent-color);
+}
+
+.hero .background-elements .bg-particle.particle-1 {
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.hero .background-elements .bg-particle.particle-2 {
+    top: 60%;
+    right: 15%;
+    animation-delay: 2s;
+}
+
+.hero .background-elements .bg-particle.particle-3 {
+    bottom: 30%;
+    left: 70%;
+    animation-delay: 4s;
+}
+
+.hero .background-elements .bg-particle.particle-4 {
+    bottom: 30%;
+    left: 30%;
+    animation-delay: 6s;
+}
+
+.hero .background-elements .bg-particle.particle-5 {
+    bottom: 30%;
+    left: 50%;
+    animation-delay: 8s;
+}
+
+/* Content Layers */
+.hero .hero-content {
+    position: relative;
+    width: 100%;
+    z-index: 2;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 3;
+}
+
+/* Glitch Effect */
+.hero .title-animated.glitch-effect {
+    position: relative;
+    animation: glitch 2s infinite;
+}
+
+.hero .title-animated.glitch-effect::before,
+.hero .title-animated.glitch-effect::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hero .title-animated.glitch-effect::before {
+    animation: glitchTop 1s infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+    color: var(--secondary-accent);
+}
+
+.hero .title-animated.glitch-effect::after {
+    animation: glitchBottom 1.5s infinite;
+    clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+    color: var(--tertiary-accent);
+}
+
+/* Matrix Reveal */
+.hero .title-animated.matrix-reveal {
+    animation: matrixReveal 3s ease-out;
+    overflow: hidden;
+}
+
+/* Cyberpunk Hologram */
+.hero .title-animated.cyberpunk-hologram {
+    animation: hologram 4s ease-in-out infinite;
+    text-shadow: 0 0 10px var(--tertiary-accent);
+}
+
+/* RGB Shift */
+.hero .title-animated.rgb-shift {
+    animation: rgbShift 2s ease-in-out infinite;
+}
+
+/* Pixelated Fade */
+.hero .title-animated.pixelated-fade {
+    animation: pixelatedFade 3s ease-out;
+}
+
+
+/* Enhanced Typography */
+.hero .hero-text h1 {
+    font-size: 72px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 15px;
+    color: var(--heading-color);
+    text-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+.hero .hero-text h1 .accent-text {
+    color: var(--accent-color);
+    position: relative;
+    background: linear-gradient(45deg, var(--accent-color), #00ff88);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero .floating-element {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.3;
+    animation: float 6s ease-in-out infinite;
+    z-index: 1;
+}
+
+.hero .floating-element:nth-child(odd) {
+    animation-direction: reverse;
+}
+
+.hero .floating-element i {
+    filter: drop-shadow(0 0 10px currentColor);
+}
+
+
+.hero .hero-text h1 .accent-text::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-color), #00ff88);
+    border-radius: 2px;
+    box-shadow: 0 0 10px var(--accent-color);
+}
+
+.hero .hero-text h4 {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--heading-color);
+    margin-bottom: 10px;
+}
+
+.hero .hero-text .lead {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: var(--default-color);
+}
+
+.hero .hero-text .lead span {
+    color: var(--accent-color);
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
+}
+
+.hero .hero-text .description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: rgba(217, 226, 221, 0.8);
+    margin-bottom: 40px;
+    max-width: 500px;
+}
+
+.hero .hero-actions {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+/* Clean Social Links */
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.hero .social-links a {
+    width: var(--icon-size-3xl);
+    height: var(--icon-size-3xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--btn-glass-bg);
+    color: var(--accent-color);
+    border-radius: 50%;
+    font-size: var(--icon-size-sm);
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+    border: var(--border-width-thin) solid var(--btn-glass-border);
+    backdrop-filter: var(--btn-glass-backdrop);
+    box-shadow: var(--btn-glass-shadow);
+}
+
+.hero .social-links a::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left var(--transition-slow);
+}
+
+.hero .social-links a:hover::before {
+    left: 100%;
+}
+
+.hero .social-links a:hover {
+    color: var(--heading-color);
+    background: var(--btn-glass-hover-bg);
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: var(--btn-glass-hover-shadow);
+    border-color: var(--accent-color);
+    text-shadow: 0 0 10px var(--accent-color);
+}
+
+/* Stats Section */
+.hero .hero-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 30px 0;
+}
+
+.hero .hero-stats .stats-title {
+    text-align: center;
+    font-size: 35px;
+    font-weight: 700;
+    font-family: var(--heading-font);
+    color: var(--heading-color);
+    margin-bottom: 30px;
+    background: var(--secondary-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+
+.hero .hero-stats .stats-grid {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    max-width: 300px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    padding: 0px;
+}
+
+/* Clean Stat Items */
+.hero .hero-stats .stat-item {
+    background: var(--bg-semi-transparent);
+    border: var(--border-width-normal) solid var(--border-color-card);
+    border-radius: var(--border-radius-medium);
+    display: flex;
+    align-items: center;
+    padding: var(--padding-md) var(--padding-lg);
+    text-align: left;
+    backdrop-filter: blur(15px);
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.hero .hero-stats .stat-item::before {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-color), var(--tertiary-accent), var(--secondary-accent));
+    transform: scaleX(0);
+    transition: transform var(--transition-normal);
+}
+
+.hero .hero-stats .stat-item:hover::before {
+    transform: scaleX(1);
+}
+
+.hero .hero-stats .stat-item:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent-color);
+    box-shadow: var(--border-glow-strong) var(--glow-green);
+}
+
+/* Update the stat-content container */
+.hero .hero-stats .stat-content {
+    text-align: right;
+    /* Align content to right */
+    margin-left: auto;
+    /* Push content to right */
+}
+
+/* Gradient Icons */
+.hero .hero-stats .stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--icon-size-3xl);
+    height: var(--icon-size-3xl);
+    margin: 0;
+    background: var(--secondary-accent);
+    border-radius: 50%;
+    font-size: var(--icon-size-sm);
+    flex-shrink: 0;
+    color: var(--tertiary-accent);
+    box-shadow: var(--border-glow) var(--glow-green);
+}
+
+.hero .hero-stats .stat-item:hover .stat-icon {
+    transform: rotate(360deg) scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 255, 136, 0.5);
+}
+
+/* Enhanced Numbers */
+.hero .hero-stats .stat-number {
+    display: block;
+    font-size: 32px;
+    font-weight: 800;
+    font-family: var(--heading-font);
+    color: var(--heading-color);
+    margin-bottom: 8px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.hero .hero-stats .stat-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--default-color);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Clean Tooltip */
+.hero .hero-stats .stat-tooltip {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%) translateY(50%) scale(0.95);
+    background: var(--bg-highly-transparent);
+    color: var(--default-color);
+    padding: var(--padding-xs) var(--padding-sm);
+    border-radius: var(--border-radius-normal);
+    font-size: var(--font-size-xs);
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-normal);
+    border: var(--border-width-thin) solid var(--accent-color);
+    box-shadow: var(--border-glow) var(--glow-green);
+    z-index: var(--z-index-tooltip);
+    backdrop-filter: blur(10px);
+    max-width: 350px;
+    white-space: normal;
+    text-align: center;
+    line-height: var(--line-height-normal);
+}
+
+.hero .hero-stats .stat-tooltip::after {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-bottom-color: rgba(26, 26, 46, 0.95);
+    border-top: none;
+}
+
+/* Active state for stat items when tooltip is shown */
+.hero .hero-stats .stat-item.tooltip-active {
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--tertiary-accent);
+    box-shadow:
+        var(--border-glow-strong) var(--glow-blue),
+        0 8px 25px rgba(0, 212, 255, 0.3);
+}
+
+.hero .hero-stats .stat-item.tooltip-active .stat-icon {
+    transform: rotate(5deg) scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 212, 255, 0.5);
+}
+
+
+/* Tooltop related updates */
+.hero .hero-stats .stat-item {
+    position: relative;
+    transition: all var(--transition-normal);
+}
+
+.hero .hero-stats .stat-item::after {
+    content: "🎯";
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+    pointer-events: none;
+}
+
+.hero .hero-stats .stat-item:hover::after {
+    opacity: 0.6;
+}
+
+/* Loading indicator for 2-second hover delay */
+.hero .hero-stats .stat-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-color), var(--tertiary-accent));
+    transition: width 2s linear;
+    opacity: 0;
+    z-index: 2;
+}
+
+.hero .hero-stats .stat-item:hover::before {
+    width: 100%;
+    opacity: 1;
+}
+
+/* Clean Animations */
+
+
+/* Enhanced Title Animations */
+.hero .title-animated.neon-pulse {
+    animation: cleanNeonPulse 2s ease-in-out infinite alternate;
+    text-shadow:
+        0 0 5px var(--accent-color),
+        0 0 10px var(--accent-color),
+        0 0 15px rgba(0, 255, 136, 0.4);
+}
+
+@media (max-width : 1200px) {
+    .hero .hero-text h1 {
+        font-size: 50px;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+
+    .hero {
+        padding-top: 2rem;
+    }
+
+    .hero .hero-text {
+        text-align: center;
+        margin-bottom: 50px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero .social-links {
+        display: flex;
+        gap: 20px;
+        margin: 25px;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero .hero-stats .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        width: 100%;
+        max-width: 600px;
+        /* Constrain maximum width for better appearance */
+        margin: 0 auto;
+        /* Center the grid */
+    }
+
+    .hero .hero-stats .stat-item {
+        /* Remove flex properties since we're using grid */
+        min-width: auto;
+        max-width: none;
+        width: 100%;
+    }
+
+    .hero .hero-text .description {
+        font-size: 16px;
+        width: auto;
+        margin: auto;
+    }
+
+    .hero .hero-actions {
+        display: flex;
+        gap: 20px;
+        margin: 25px;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero .hero-text h1 {
+        font-size: 42px;
+    }
+
+    .hero .hero-text h4 {
+        font-size: 24px;
+    }
+
+    .hero .hero-text .lead {
+        font-size: 18px;
+    }
+
+    .hero .hero-text .description {
+        font-size: 16px;
+        width: auto;
+        margin: auto;
+    }
+
+    .hero .hero-actions {
+        display: flex;
+        gap: 20px;
+        margin: 25px;
+        flex-wrap: wrap;
+    }
+
+    .hero-actions .btn {
+        padding: 18px 36px;
+        font-size: 18px;
+        font-weight: 700;
+        min-width: 180px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .hero-actions .btn i {
+        font-size: 20px;
+    }
+
+    .hero .hero-stats .stats-grid {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .hero .hero-stats .stat-item {
+        min-width: auto;
+        max-width: 100%;
+    }
+
+    .hero .background-elements .bg-circle.circle-1 {
+        display: none;
+    }
+
+    .hero .background-elements .bg-circle.circle-2 {
+        display: none;
+    }
+}
+
+@media (max-width : 540px) {
+    .hero .hero-stats .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+        width: 100%;
+        max-width: 600px;
+        /* Constrain maximum width for better appearance */
+        margin: 0 auto;
+        /* Center the grid */
+    }
+
+    .hero .hero-stats .stat-item {
+        /* Remove flex properties since we're using grid */
+        min-width: auto;
+        max-width: none;
+        width: 100%;
+    }
+}

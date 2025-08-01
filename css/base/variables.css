@@ -1,0 +1,482 @@
+/**
+ * Enhanced Gaming Portfolio CSS Variables - Complete Theme System
+ */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800;900');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide:wght@400');
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;600;700');
+@import url('https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Faster+One:wght@300;400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P:wght@300;400;500;600;700;800&display=swap');
+
+/* ==============================================
+   FONT SYSTEM
+   ============================================== */
+:root {
+    --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --heading-font: "Orbitron", sans-serif;
+    --heading2-font: "Rajdhani";
+    --heading3-font: "Ubuntu";
+    --heading4-font: "Rajdhani";
+    --heading5-font: "Saira Condensed";
+    --heading6-font: "Ubuntu";
+    --nav-font: "Nunito", "Rajdhani", sans-serif;
+    --code-font: "Fira Code", "Consolas", monospace;
+}
+
+/* ==============================================
+   BASE COLOR PALETTE
+   ============================================== */
+:root {
+    --background-color: #16213e;
+    --surface-color: #1e7345;
+    --surface-light: #4d966f;
+    --surface-dark: #053a1e;
+
+    /* Primary Colors */
+    --default-color: #d9e2dd;
+    --contrast-color: #000000;
+    --contrast-color-transparent: #00000040;
+
+    /* Heading Colors */
+    --heading-color: #ffffff;
+    --heading2-color: #ffffff;
+    --heading3-color: #ffffff;
+    --heading4-color: #ffffff;
+    --heading5-color: #ffffff;
+    --heading6-color: #ffffff;
+}
+
+/* ==============================================
+   ACCENT COLOR SYSTEM
+   ============================================== */
+:root {
+    /* Glass Green */
+    --accent-color: #37c968;
+    --accent-color-light: #96e4b0;
+    --accent-color-dark: #22693a;
+
+    /* Magenta Pink */
+    --secondary-accent: #ff0080;
+    --secondary-accent-light: #da97b8;
+    --secondary-accent-dark: #4e0328;
+
+    /* Neon Blue */
+    --tertiary-accent: #00d4ff;
+    --tertiary-accent-light: #b6f3ff;
+    --tertiary-accent-dark: #0a5e6f;
+
+    /* Electric Yellow */
+    --quaternary-accent: #ffff00;
+    --quaternary-accent-light: #c6c68d;
+    --quaternary-accent-dark: #676706;
+
+    /* Gaming UI Colors */
+    --success-color: #00ff9f;
+    --warning-color: #ff6b00;
+    --error-color: #ff0040;
+    --info-color: #00d4ff;
+}
+
+/* ==============================================
+   TRANSPARENCY SYSTEM
+   ============================================== */
+:root {
+    /* Opacity Levels */
+    --opacity-lowest: 0.05;
+    --opacity-low: 0.1;
+    --opacity-medium-low: 0.15;
+    --opacity-medium: 0.2;
+    --opacity-medium-high: 0.3;
+    --opacity-high: 0.5;
+    --opacity-highest: 0.8;
+    --opacity-near-full: 0.9;
+
+    /* Common Semi-Transparent Backgrounds */
+    --bg-semi-transparent: rgba(26, 26, 46, 0.6);
+    --bg-highly-transparent: rgba(26, 26, 46, 0.8);
+    --bg-overlay: rgba(0, 0, 0, 0.3);
+    --bg-dark-overlay: rgba(0, 0, 0, 0.5);
+    --bg-light-overlay: rgba(255, 255, 255, 0.05);
+    --bg-accent-overlay: rgba(56, 172, 95, 0.1);
+
+    /* Semi-Transparent Colors */
+    --accent-transparent-10: rgba(56, 172, 95, 0.1);
+    --accent-transparent-15: rgba(56, 172, 95, 0.15);
+    --accent-transparent-20: rgba(56, 172, 95, 0.2);
+    --accent-transparent-30: rgba(56, 172, 95, 0.3);
+
+    --secondary-transparent-10: rgba(255, 0, 128, 0.1);
+    --secondary-transparent-15: rgba(255, 0, 128, 0.15);
+    --secondary-transparent-20: rgba(255, 0, 128, 0.2);
+    --secondary-transparent-30: rgba(255, 0, 128, 0.3);
+
+    --tertiary-transparent-10: rgba(0, 212, 255, 0.1);
+    --tertiary-transparent-15: rgba(0, 212, 255, 0.15);
+    --tertiary-transparent-20: rgba(0, 212, 255, 0.2);
+    --tertiary-transparent-30: rgba(0, 212, 255, 0.3);
+
+    --white-transparent-05: rgba(255, 255, 255, 0.05);
+    --white-transparent-10: rgba(255, 255, 255, 0.1);
+    --white-transparent-20: rgba(255, 255, 255, 0.2);
+    --white-transparent-30: rgba(255, 255, 255, 0.3);
+}
+
+/* ==============================================
+   EFFECTS & GRADIENTS
+   ============================================== */
+:root {
+    --background-gradient: linear-gradient(120deg, var(--contrast-color) 0%, var(--input-bg) 30%, var(--input-bg) 70%);
+
+    /* Advanced Gaming Colors */
+    --glow-green: var(--accent-color-dark);
+    --glow-magenta: var(--secondary-accent-dark);
+    --glow-blue: var(--tertiary-accent-dark);
+    --glow-yellow: var(--quaternary-accent-dark);
+
+    /* Shadows & Effects */
+    --box-shadow-color: rgba(0, 255, 159, 0.2);
+    --box-shadow-color2: rgba(255, 0, 128, 0.2);
+    --box-shadow-color3: rgba(0, 212, 255, 0.2);
+
+    /* Common Gradients */
+    --gradient-primary: linear-gradient(45deg, var(--accent-color), var(--tertiary-accent));
+    --gradient-secondary: linear-gradient(45deg, var(--secondary-accent), var(--quaternary-accent));
+    --gradient-gaming: linear-gradient(45deg, var(--accent-color), var(--tertiary-accent), var(--secondary-accent));
+    --gradient-glass: linear-gradient(135deg, var(--accent-transparent-10), var(--tertiary-transparent-10));
+}
+
+/* ==============================================
+   BORDERS & INPUTS
+   ============================================== */
+:root {
+    --border-color: var(--accent-color-dark);
+    --border-color-green: var(--accent-color-dark);
+    --border-color-hover: var(--accent-color-light);
+    --card-border-color: var(--accent-color-dark);
+    --input-bg: #1a1a2e;
+    --input-border: #00ff9f;
+    --input-focus: #00d4ff;
+
+    /* Border width variables */
+    --border-width-thin: 1px;
+    --border-width-normal: 2px;
+    --border-width-medium: 3px;
+    --border-width-thick: 4px;
+    --border-width-extra-thick: 6px;
+
+    /* Border radius variables */
+    --border-radius-small: 8px;
+    --border-radius-normal: 12px;
+    --border-radius-medium: 20px;
+    --border-radius-large: 25px;
+    --border-radius-xl: 30px;
+    --border-radius-xxl: 40px;
+
+    /* Gaming border effects */
+    --border-glow: 0 0 15px;
+    --border-glow-intense: 0 0 25px;
+    --border-glow-strong: 0 0 35px;
+}
+
+/* ==============================================
+   SPACING SYSTEM
+   ============================================== */
+:root {
+    /* Standard Spacing Scale */
+    --spacing-xs: 0.25rem;
+    /* 4px */
+    --spacing-sm: 0.5rem;
+    /* 8px */
+    --spacing-md: 1rem;
+    /* 16px */
+    --spacing-lg: 1.5rem;
+    /* 24px */
+    --spacing-xl: 2rem;
+    /* 32px */
+    --spacing-2xl: 3rem;
+    /* 48px */
+    --spacing-3xl: 4rem;
+    /* 64px */
+    --spacing-4xl: 6rem;
+    /* 96px */
+
+    /* Padding Variants */
+    --padding-xs: 0.5rem;
+    --padding-sm: 0.75rem;
+    --padding-md: 1rem;
+    --padding-lg: 1.5rem;
+    --padding-xl: 2rem;
+    --padding-2xl: 2.5rem;
+    --padding-3xl: 3rem;
+
+
+    /* margin Variants */
+    --margin-xs: 0.5rem;
+    --margin-sm: 0.75rem;
+    --margin-md: 1rem;
+    --margin-lg: 1.5rem;
+    --margin-xl: 2rem;
+    --margin-2xl: 2.5rem;
+    --margin-3xl: 3rem;
+
+    /* Section Padding */
+    --section-padding: 100px 0;
+    --section-padding-md: 80px 0;
+    --section-padding-sm: 60px 0;
+
+    /*Icons */
+
+    --icon-height-sm: 100px;
+    --icon-weidth-sm: 100px;
+
+    --icon-height-md: 120px;
+    --icon-weidth-md: 120px;
+
+    /* Card Dimensions */
+    --card-height-sm: 400px;
+    --card-height-md: 480px;
+    --card-height-lg: 500px;
+    --card-height-xl: 600px;
+
+    /* Icon Sizes */
+    --icon-size-xs: 16px;
+    --icon-size-sm: 20px;
+    --icon-size-md: 24px;
+    --icon-size-lg: 32px;
+    --icon-size-xl: 40px;
+    --icon-size-2xl: 48px;
+    --icon-size-3xl: 60px;
+
+    /* Avatar Sizes */
+    --avatar-size-sm: 40px;
+    --avatar-size-md: 48px;
+    --avatar-size-lg: 60px;
+    --avatar-size-xl: 80px;
+
+    /* Grid Gaps */
+    --grid-gap-sm: 1rem;
+    --grid-gap-md: 1.5rem;
+    --grid-gap-lg: 2rem;
+    --grid-gap-xl: 3rem;
+    --grid-gap-2xl: 4rem;
+}
+
+/* ==============================================
+   TYPOGRAPHY SCALE
+   ============================================== */
+:root {
+    /* Font Sizes */
+    --font-size-xs: 0.75rem;
+    /* 12px */
+    --font-size-sm: 0.875rem;
+    /* 14px */
+    --font-size-base: 1rem;
+    /* 16px */
+    --font-size-lg: 1.125rem;
+    /* 18px */
+    --font-size-xl: 1.25rem;
+    /* 20px */
+    --font-size-2xl: 1.5rem;
+    /* 24px */
+    --font-size-3xl: 1.875rem;
+    /* 30px */
+    --font-size-4xl: 2.25rem;
+    /* 36px */
+    --font-size-5xl: 3rem;
+    /* 48px */
+    --font-size-6xl: 4rem;
+    /* 64px */
+    --font-size-7xl: 5rem;
+    /* 80px */
+
+    /* Line Heights */
+    --line-height-tight: 1.2;
+    --line-height-normal: 1.4;
+    --line-height-relaxed: 1.6;
+    --line-height-loose: 1.8;
+
+    /* Letter Spacing */
+    --letter-spacing-tight: -0.025em;
+    --letter-spacing-normal: 0;
+    --letter-spacing-wide: 0.025em;
+    --letter-spacing-wider: 0.05em;
+    --letter-spacing-widest: 0.1em;
+}
+
+/* ==============================================
+   BUTTON SYSTEM
+   ============================================== */
+:root {
+    /* Glassy Button System */
+    --btn-glass-bg: rgba(0, 255, 159, 0.1);
+    --btn-glass-border: rgba(0, 255, 159, 0.3);
+    --btn-glass-hover-bg: rgba(0, 255, 159, 0.2);
+    --btn-glass-backdrop: blur(15px);
+    --btn-glass-shadow: 0 8px 32px rgba(0, 255, 159, 0.2);
+    --btn-glass-hover-shadow: 0 12px 40px rgba(0, 255, 159, 0.4);
+
+    /* Secondary Glass Button */
+    --btn-glass-secondary-bg: rgba(255, 0, 128, 0.1);
+    --btn-glass-secondary-border: rgba(255, 0, 128, 0.3);
+    --btn-glass-secondary-hover-bg: rgba(255, 0, 128, 0.2);
+    --btn-glass-secondary-shadow: 0 8px 32px rgba(255, 0, 128, 0.2);
+    --btn-glass-secondary-hover-shadow: 0 12px 40px rgba(255, 0, 128, 0.4);
+
+    /* Button Padding */
+    --btn-padding-sm: 0.5rem 1rem;
+    --btn-padding-md: 0.75rem 1.5rem;
+    --btn-padding-lg: 1rem 2rem;
+    --btn-padding-xl: 1.25rem 2.5rem;
+}
+
+/* ==============================================
+   ANIMATION & TRANSITIONS
+   ============================================== */
+:root {
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.6s ease;
+    --bounce-effect: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    /* Animation Durations */
+    --duration-fastest: 0.1s;
+    --duration-fast: 0.2s;
+    --duration-normal: 0.3s;
+    --duration-slow: 0.5s;
+    --duration-slowest: 1s;
+
+    /* Animation Delays */
+    --delay-xs: 0.1s;
+    --delay-sm: 0.15s;
+    --delay-md: 0.2s;
+    --delay-lg: 0.25s;
+    --delay-xl: 0.3s;
+    --delay-2xl: 0.35s;
+    --delay-3xl: 0.4s;
+    --delay-4xl: 0.45s;
+}
+
+/* ==============================================
+   Z-INDEX SYSTEM
+   ============================================== */
+:root {
+    --z-index-negative: -1;
+    --z-index-base: 0;
+    --z-index-elevated: 1;
+    --z-index-sticky: 10;
+    --z-index-dropdown: 100;
+    --z-index-overlay: 900;
+    --z-index-modal: 1000;
+    --z-index-popover: 1100;
+    --z-index-tooltip: 1200;
+    --z-index-max: 9999;
+}
+
+/* ==============================================
+   SERVICE COLORS
+   ============================================== */
+:root {
+    --linkedin-blue: #0077b5;
+    --linkedin-blue-hover: #005885;
+    --google-red: #ea4335;
+    --google-green: #34a853;
+    --google-blue: #4285f4;
+    --github-dark: #24292e;
+    --discord-purple: #5865f2;
+    --twitter-blue: #1da1f2;
+}
+
+/* ==============================================
+   COMPONENT SPECIFIC
+   ============================================== */
+:root {
+    --category-filter-background: rgba(57, 83, 122, 0.137);
+    --ribbon-border: var(--contrast-color);
+    --border-color-card: var(--surface-light);
+
+    /* Nav Menu Colors */
+    --nav-color: #e0e6ff;
+    --nav-hover-color: #00ff9f;
+    --nav-mobile-background-color: #1a1a2e;
+    --nav-dropdown-background-color: #16213e;
+    --nav-dropdown-color: #e0e6ff;
+    --nav-dropdown-hover-color: #00ff9f;
+
+    /* Header specific */
+    --header-width-collapsed: 150px;
+    --header-width-expanded: 300px;
+    --header-bg: #1b1b1b;
+}
+
+/* ==============================================
+   THEME PRESETS
+   ============================================== */
+.neon-cyber-theme {
+    --background-color: #0a0a0f;
+    --surface-color: #1a1a2e;
+    --accent-color: #00ff9f;
+    --secondary-accent: #ff0080;
+    --tertiary-accent: #00d4ff;
+    --box-shadow-color: rgba(0, 255, 159, 0.3);
+    --box-shadow-color2: rgba(255, 0, 128, 0.3);
+    --box-shadow-color3: rgba(0, 212, 255, 0.3);
+}
+
+.retro-synthwave-theme {
+    --background-color: #1a0d2e;
+    --surface-color: #2e1a47;
+    --accent-color: #ff6b35;
+    --secondary-accent: #ff0080;
+    --tertiary-accent: #00d4ff;
+    --box-shadow-color: rgba(255, 107, 53, 0.3);
+    --box-shadow-color2: rgba(255, 0, 128, 0.3);
+    --box-shadow-color3: rgba(0, 212, 255, 0.3);
+}
+
+.matrix-hacker-theme {
+    --background-color: #000000;
+    --surface-color: #001100;
+    --accent-color: #00ff41;
+    --secondary-accent: #00ff9f;
+    --tertiary-accent: #00d4ff;
+    --default-color: #00ff41;
+    --box-shadow-color: rgba(0, 255, 65, 0.3);
+    --box-shadow-color2: rgba(0, 255, 159, 0.3);
+    --box-shadow-color3: rgba(0, 212, 255, 0.3);
+}
+
+.cyberpunk-theme {
+    --background-color: #0d0208;
+    --surface-color: #1a0f1a;
+    --accent-color: #00f5ff;
+    --secondary-accent: #ffbe0b;
+    --tertiary-accent: #ff0080;
+    --box-shadow-color: rgba(0, 245, 255, 0.3);
+    --box-shadow-color2: rgba(255, 190, 11, 0.3);
+    --box-shadow-color3: rgba(255, 0, 128, 0.3);
+}
+
+.gaming-rgb-theme {
+    --background-color: #0a0a0a;
+    --surface-color: #1a1a1a;
+    --accent-color: #00ff9f;
+    --secondary-accent: #ff0080;
+    --tertiary-accent: #00d4ff;
+    --quaternary-accent: #ffff00;
+    --box-shadow-color: rgba(0, 255, 159, 0.25);
+    --box-shadow-color2: rgba(255, 0, 128, 0.25);
+    --box-shadow-color3: rgba(0, 212, 255, 0.25);
+}
+
+/* ==============================================
+   SMOOTH SCROLL
+   ============================================== */
+:root {
+    scroll-behavior: smooth;
+}

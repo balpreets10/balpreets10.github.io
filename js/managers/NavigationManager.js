@@ -1,5 +1,5 @@
 /**
- * Enhanced Navigation Manager - Handles active states and hover collapse for navigation items
+ * Enhanced Navigation Manager - Handles active states, hover collapse, and mobile slide animation
  */
 class NavigationManager {
     constructor() {
@@ -7,8 +7,11 @@ class NavigationManager {
         this.navItems = [];
         this.isScrolling = false;
         this.header = null;
+        this.headerToggle = null;
+        this.backdrop = null;
         this.isCollapsed = true; // Start in collapsed state
         this.isMobile = false;
+        this.isNavOpen = false; // Mobile nav state
         this.init();
     }
 
@@ -24,6 +27,8 @@ class NavigationManager {
     setup() {
         // Get header element
         this.header = document.querySelector('#header');
+        this.headerToggle = document.querySelector('.header-toggle');
+
         if (!this.header) {
             console.warn('Header element not found');
             return;
@@ -53,6 +58,9 @@ class NavigationManager {
         // Check if mobile
         this.checkMobile();
 
+        // Setup mobile navigation
+        this.setupMobileNavigation();
+
         // Add click handlers
         this.addClickHandlers();
 
@@ -72,6 +80,90 @@ class NavigationManager {
         this.updateActiveState();
 
         console.log('Enhanced Navigation Manager initialized with sections:', this.sections.map(s => s.id));
+    }
+
+    setupMobileNavigation() {
+        if (!this.headerToggle) return;
+
+        // Create backdrop for mobile
+        this.createBackdrop();
+
+        // Add toggle event listener
+        this.headerToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.toggleMobileNav();
+        });
+
+        // Close nav when clicking backdrop
+        if (this.backdrop) {
+            this.backdrop.addEventListener('click', () => {
+                this.closeMobileNav();
+            });
+        }
+
+        // Close nav on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.isNavOpen) {
+                this.closeMobileNav();
+            }
+        });
+
+        // Close nav when clicking nav links (mobile)
+        this.navItems.forEach(navItem => {
+            navItem.addEventListener('click', () => {
+                if (this.isMobile && this.isNavOpen) {
+                    // Small delay to allow smooth scroll to start
+                    setTimeout(() => {
+                        this.closeMobileNav();
+                    }, 100);
+                }
+            });
+        });
+    }
+
+    createBackdrop() {
+        // Only create if it doesn't exist
+        if (this.backdrop || !document.body) return;
+
+        this.backdrop = document.createElement('div');
+        this.backdrop.className = 'header-backdrop';
+        document.body.appendChild(this.backdrop);
+    }
+
+    toggleMobileNav() {
+        if (this.isNavOpen) {
+            this.closeMobileNav();
+        } else {
+            this.openMobileNav();
+        }
+    }
+
+    openMobileNav() {
+        if (!this.isMobile) return;
+
+        this.isNavOpen = true;
+        this.header.classList.add('header-show');
+        document.body.classList.add('nav-open');
+
+        // Update toggle button
+        if (this.headerToggle) {
+            this.headerToggle.classList.remove('bi-list');
+            this.headerToggle.classList.add('bi-x');
+        }
+    }
+
+    closeMobileNav() {
+        if (!this.isMobile) return;
+
+        this.isNavOpen = false;
+        this.header.classList.remove('header-show');
+        document.body.classList.remove('nav-open');
+
+        // Update toggle button
+        if (this.headerToggle) {
+            this.headerToggle.classList.add('bi-list');
+            this.headerToggle.classList.remove('bi-x');
+        }
     }
 
     checkMobile() {
@@ -106,12 +198,13 @@ class NavigationManager {
                 const wasMobile = this.isMobile;
                 this.checkMobile();
 
-                // If switching from mobile to desktop, add hover handlers
+                // If switching from mobile to desktop
                 if (wasMobile && !this.isMobile) {
+                    this.closeMobileNav(); // Close mobile nav
                     this.addHoverHandlers();
                     this.setCollapsedState(true);
                 }
-                // If switching from desktop to mobile, remove hover classes
+                // If switching from desktop to mobile
                 else if (!wasMobile && this.isMobile) {
                     this.removeHoverClasses();
                 }
@@ -231,11 +324,7 @@ class NavigationManager {
         this.isScrolling = true;
 
         // Calculate header offset based on current state
-        let headerOffset = 0;
-        if (this.header) {
-            const headerWidth = this.header.offsetWidth;
-            headerOffset = headerWidth > 300 ? 0 : 80;
-        }
+        const headerOffset = 10;
 
         const targetPosition = targetElement.offsetTop - headerOffset;
 
@@ -267,6 +356,7 @@ class NavigationManager {
         return {
             isCollapsed: this.isCollapsed,
             isMobile: this.isMobile,
+            isNavOpen: this.isNavOpen,
             activeSection: this.sections.find(s => s.navItem?.classList.contains('active'))?.id
         };
     }

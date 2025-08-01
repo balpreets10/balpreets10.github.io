@@ -4,7 +4,7 @@
 class ContactSection {
     constructor() {
         this.config = {
-            title: "Let's Build Something Amazing Together",
+            title: "Have an Idea ??",
             subtitle: "Ready to bring your game ideas to life? Let's connect and create the next big hit!",
             contactInfo: {
                 email: "balpreets10@gmail.com",

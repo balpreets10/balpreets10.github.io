@@ -160,7 +160,16 @@ class SectionManager {
             }
 
             const sectionInstance = new SectionClass();
-            const renderedElement = sectionInstance.render();
+            let renderedElement;
+            const renderResult = sectionInstance.render();
+
+            // Check if render() returns a Promise
+            if (renderResult && typeof renderResult.then === 'function') {
+                console.log(`Section '${sectionId}' has async render method, awaiting...`);
+                renderedElement = await renderResult;
+            } else {
+                renderedElement = renderResult;
+            }
 
             if (!renderedElement) {
                 throw new Error(`Section '${sectionId}' render() returned null`);

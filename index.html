@@ -9,36 +9,65 @@
   <meta name="keywords" content="">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="assets/images/favicon.png" type="image/x-icon" rel="icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <!-- CDN CSS Files -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- NO Google Analytics here - loaded conditionally by AnalyticsManager -->
 </head>
 
 <body class="index-page">
 
   <!-- Managers -->
-
+  <script src="js/managers/ImageManager.js"></script>
   <script src="js/managers/CSSManager.js"></script>
   <script src="js/managers/SectionManager.js"></script>
   <script src="js/managers/NavigationManager.js"></script>
   <script src="js/managers/PreloaderManager.js"></script>
+  <script src="js/managers/ModalManager.js"></script>
+  <script src="js/managers/DataUsageTracker.js"></script>
 
 
-  <!-- Data -->
-  <script src="js/data/projects-data.js"></script>
+  <!-- Analytics & Tracking System -->
+  <script src="js/managers/AnalyticsManager.js"></script>
+  <script src="js/managers/TrackingConsentManager.js"></script>
+
+  <!-- AI -->
+  <script src="js/managers/ChatWidget.js"></script>
+  <script src="js/ai-assistant/ContentMapper.js"></script>
+
+  <!-- Modals-->
+  <script src="js/components/projectModal.js"></script>
+  <script src="js/components/gameInfoModal.js"></script>
+  <script src="js/components/skillsModal.js"></script>
+
+
+  <!-- Section Tracking -->
+  <script src="js/tracking/tracking-herosection.js"></script>
+  <script src="js/tracking/tracking-portfolio.js"></script>
+  <script src="js/tracking/tracking-skills.js"></script>
+  <script src="js/tracking/tracking-experience.js"></script>
+  <script src="js/tracking/tracking-contact.js"></script>
+  <script src="js/tracking/tracking-testimonials.js"></script>
+
+  <!-- Modal Tracking -->
+  <script src="js/tracking/modals/tracking-gameInfoModal.js"></script>
+  <script src="js/tracking/modals/tracking-projectModal.js"></script>
+  <script src="js/tracking/modals/tracking-skillsModal.js"></script>
+
+
+
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
@@ -48,20 +77,12 @@
   <!-- Preloader -->
   <div id="preloader"></div>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/typed.js/typed.umd.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <!-- CDN JS Files -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
   <!-- Application Initialization -->
-  <!-- Updated Application Initialization Script -->
   <script>
     document.addEventListener('DOMContentLoaded', async function () {
       try {
@@ -76,6 +97,7 @@
 
         // 3. Register all sections with SectionManager
         registerSections();
+        initializeChatWidget();
 
         // 4. Render all sections
         await window.sectionManager.renderAllSections();
@@ -89,8 +111,24 @@
           initializeNavigationManager();
         }, 200);
 
-        // 7. Mark loading as complete - this triggers the enhanced preloader animation
+        // 7. Initialize ContentMapper
+        window.contentMapper = new ContentMapper();
+        await window.contentMapper.init();
+        console.log('ContentMapper ready');
+
+        // 8. Initialize Analytics Manager (ready to receive consent)
+        initializeAnalyticsManager();
+
+        // 9. Initialize Tracking Consent Manager (shows footer notification)
+        initializeTrackingConsent();
+
+        // 10. Mark loading as complete - this triggers the enhanced preloader animation
         await window.preloaderManager.markLoadingComplete();
+
+        // 11. NEW: Mark data tracking as complete
+        if (window.dataUsageTracker) {
+          window.dataUsageTracker.markRenderingComplete('initialization_complete');
+        }
 
         console.log('Portfolio website initialized successfully');
 
@@ -104,17 +142,51 @@
     });
 
     /**
+     * Initialize Analytics Manager
+     */
+    function initializeAnalyticsManager() {
+      if (window.AnalyticsManager && window.analyticsManager) {
+        console.log('Analytics Manager initialized and ready for consent');
+
+        // Analytics is now ready but won't track until consent is given
+        // The TrackingConsentManager will call analyticsManager.init() when user consents
+
+        // Test analytics (only logs when no consent)
+        window.analyticsManager.trackEvent('app_initialized', {
+          timestamp: Date.now(),
+          user_agent: navigator.userAgent.substring(0, 100)
+        });
+
+      } else {
+        console.error('AnalyticsManager not found');
+      }
+    }
+
+    /**
+     * Initialize Tracking Consent System
+     */
+    function initializeTrackingConsent() {
+      if (window.TrackingConsentManager) {
+        // TrackingConsentManager is already initialized globally as window.trackingConsent
+        // Check for consent and show footer notification if needed
+        window.trackingConsent.checkConsent();
+        console.log('Tracking consent system initialized');
+      } else {
+        console.error('TrackingConsentManager not found');
+      }
+    }
+
+    /**
      * Register all sections with their configurations
-     * CSS loading removed - handled by CSSManager
      */
     function registerSections() {
       const sections = [
         {
           id: 'header',
-          class: 'HeaderSection',  // String class name - will be resolved by SectionManager
+          class: 'HeaderSection',
           container: 'body',
           order: 0,
-          loadJS: true   // Only JS loading now
+          loadJS: true
         },
         {
           id: 'hero',
@@ -179,11 +251,9 @@
     }
 
     /**
-  * Initialize core website features
-  * @param {boolean} removePreloader - Whether to remove preloader (default: true)
-  */
+     * Initialize core website features
+     */
     async function initializeCoreFeatures(removePreloader = true) {
-      // Remove preloader only if explicitly requested (old behavior)
       if (removePreloader) {
         const preloader = document.querySelector('#preloader');
         if (preloader) {
@@ -191,13 +261,9 @@
         }
       }
 
-      // Initialize header toggle functionality
       initializeHeaderToggle();
-
-      // Initialize scroll top functionality  
       initializeScrollTop();
 
-      // Initialize AOS (Animate On Scroll)
       if (typeof AOS !== 'undefined') {
         AOS.init({
           duration: 800,
@@ -209,9 +275,6 @@
       }
     }
 
-    /**
-     * Initialize header toggle functionality
-     */
     function initializeHeaderToggle() {
       const headerToggleBtn = document.querySelector('.header-toggle');
       const header = document.querySelector('#header');
@@ -226,9 +289,15 @@
       }
     }
 
-    /**
-     * Initialize scroll top button functionality
-     */
+    function initializeChatWidget() {
+      if (window.ChatWidget && window.modalManager) {
+        window.chatWidget = new ChatWidget();
+        console.log('ChatWidget initialized');
+      } else {
+        setTimeout(initializeChatWidget, 500);
+      }
+    }
+
     function initializeScrollTop() {
       const scrollTop = document.querySelector('.scroll-top');
 
@@ -248,15 +317,12 @@
         });
 
         window.addEventListener('scroll', toggleScrollTop);
-        toggleScrollTop(); // Initial check
+        toggleScrollTop();
 
         console.log('Scroll top functionality initialized');
       }
     }
 
-    /**
-     * Initialize NavigationManager
-     */
     function initializeNavigationManager() {
       if (window.NavigationManager) {
         window.navigationManager = new NavigationManager();
@@ -265,6 +331,7 @@
         console.error('NavigationManager class not found');
       }
     }
+
   </script>
 </body>
 

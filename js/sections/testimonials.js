@@ -3,51 +3,68 @@
  */
 class TestimonialsSection {
     constructor() {
-        this.config = {
+        this.config = null;
+        this.dataLoaded = false;
+    }
+
+    async loadTestimonialsData() {
+        if (this.dataLoaded) {
+            return this.config;
+        }
+
+        try {
+            const response = await fetch('data/testimonials-data.json');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            this.config = await response.json();
+            this.dataLoaded = true;
+            console.log('Testimonials data loaded successfully');
+            return this.config;
+        } catch (error) {
+            console.error('Error loading testimonials data:', error);
+            // Fallback to default config if JSON fails to load
+            this.config = this.getDefaultConfig();
+            this.dataLoaded = true;
+            return this.config;
+        }
+    }
+
+    getDefaultConfig() {
+        // Fallback config in case JSON loading fails
+        return {
             title: 'Testimonials',
             subtitle: 'What industry professionals say about working with me',
             testimonials: [
                 {
                     quote: 'The kind of technical leader who transforms teams and elevates outcomes. Visionary in systems design with unmatched problem solving attitude. Navigates high-pressure scenarios with calm and turns challenges into opportunities',
                     clientName: 'Sameer Bhanot',
-                    clientPosition: 'Co-Founder - Rovelens & Technical Director - ArdentInfo Solutions',
-                    clientImage: 'https://media.licdn.com/dms/image/v2/C4D03AQEFLLmXUVe0QA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1605625324403?e=1755734400&v=beta&t=FUy5Z3jSoW7Cp3QJka2cvolxo5Hg2oD2lG7KcJqozjs',
+                    positions: ['Co-Founder', 'Technical Director'],
+                    companies: ['Rovelens', 'ArdentInfo Solutions'],
+                    linkedinImage: 'https://media.licdn.com/dms/image/v2/C4D03AQEFLLmXUVe0QA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1605625324403?e=1755734400&v=beta&t=FUy5Z3jSoW7Cp3QJka2cvolxo5Hg2oD2lG7KcJqozjs',
+                    companyLogo: '',
+                    profileUrl: '',
                     highlight: true
                 },
                 {
                     quote: 'Played a key role in shaping the technical direction of the project and led a team of 15 developers with clarity, patience, and strong leadership. Ability to stay grounded and collaborative',
                     clientName: 'Ankush Sharma',
-                    clientPosition: 'Senior Game Developer - King Entertainment Corp',
-                    clientImage: 'https://media.licdn.com/dms/image/v2/D5603AQFMxdkhfUkNRw/profile-displayphoto-shrink_400_400/B56ZTy9CL3GQAk-/0/1739242876229?e=1755734400&v=beta&t=bAGTsJXjBJRX7neGYJoNp6SEgJKMC-RYRQPJIKsbWj8',
+                    positions: ['Senior Game Developer'],
+                    companies: ['King Entertainment Corp'],
+                    linkedinImage: 'https://media.licdn.com/dms/image/v2/D5603AQFMxdkhfUkNRw/profile-displayphoto-shrink_400_400/B56ZTy9CL3GQAk-/0/1739242876229?e=1755734400&v=beta&t=bAGTsJXjBJRX7neGYJoNp6SEgJKMC-RYRQPJIKsbWj8',
+                    companyLogo: '',
+                    profileUrl: '',
                     highlight: false
                 },
                 {
                     quote: 'Highly productive and unwavering commitment to quality in every aspect. Deep understanding of game development paired with technical knowledge and vision consistently guided the team towards success',
                     clientName: 'Gunjita Jamwal',
-                    clientPosition: 'Software Engineer @ Scopely',
-                    clientImage: 'https://media.licdn.com/dms/image/v2/D5603AQGh8wqQhdrjbA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1718250502224?e=1755734400&v=beta&t=Lh40NG651n0hVSpNf9jEJDWe3MM46YGku0E7y-GUGi0',
+                    positions: ['Software Engineer'],
+                    companies: ['Scopely'],
+                    linkedinImage: 'https://media.licdn.com/dms/image/v2/D5603AQGh8wqQhdrjbA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1718250502224?e=1755734400&v=beta&t=Lh40NG651n0hVSpNf9jEJDWe3MM46YGku0E7y-GUGi0',
+                    companyLogo: '',
+                    profileUrl: '',
                     highlight: false
-                },
-                {
-                    quote: 'Led our team with a blend of deep technical mastery and remarkable people leadership. Transformed blockers into teaching moments, shielded the team from noise',
-                    clientName: 'Anant Sharma',
-                    clientPosition: 'Senior Game Developer - Miniclip',
-                    clientImage: 'https://media.licdn.com/dms/image/v2/D4D03AQG-CUSfrhiT-w/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1732070678330?e=1755734400&v=beta&t=SkBJR-DGzbl6_UImggAGamZhqB5rcLxKOEY_6jO8B6c',
-                    highlight: false
-                },
-                {
-                    quote: 'Played a key role in shaping the technical direction of the module. Ability to stay grounded and collaborative and always learning aptitude',
-                    clientName: 'Santosh Shedbalkar',
-                    clientPosition: 'Director Of Engineering - Scopely',
-                    clientImage: 'https://media.licdn.com/dms/image/v2/C5103AQHLeYF5wS6v4Q/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1554402118017?e=1755734400&v=beta&t=I77Zi-WkQcdb8ZE2daXkX3OoiHlWnSvdfj-gKLVq3Sk',
-                    highlight: true
-                },
-                {
-                    quote: 'Able, calm and cool headed with technical brilliancy. Always figuring out innovative solutions and optimal pathways',
-                    clientName: 'Altaf Navalur',
-                    clientPosition: 'Director of Engineering - Junglee Games',
-                    clientImage: 'https://media.licdn.com/dms/image/v2/D5603AQEXcF3Grm2bqA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1711697179706?e=1755734400&v=beta&t=l2aHc2E5in82G4STEY4rG4bpugrgGonR2kl3nqdUHiU',
-                    highlight: true
                 }
             ]
         };
@@ -73,6 +90,22 @@ class TestimonialsSection {
         const card = document.createElement('div');
         card.className = testimonial.highlight ? 'testimonial-card highlight' : 'testimonial-card';
 
+        // Company logo (top right corner)
+        if (testimonial.companyLogo) {
+            const companyLogo = document.createElement('div');
+            companyLogo.className = 'company-logo';
+            const logoImg = document.createElement('img');
+            logoImg.src = testimonial.companyLogo;
+            logoImg.alt = `${testimonial.companies?.[0] || 'Company'} logo`;
+            logoImg.loading = 'lazy';
+            logoImg.onerror = () => {
+                // Hide logo container if image fails to load
+                companyLogo.style.display = 'none';
+            };
+            companyLogo.appendChild(logoImg);
+            card.appendChild(companyLogo);
+        }
+
         // Quote icon
         const quoteIcon = document.createElement('div');
         quoteIcon.className = 'quote-icon';
@@ -93,8 +126,18 @@ class TestimonialsSection {
         const clientAvatar = document.createElement('div');
         clientAvatar.className = 'client-avatar';
         const img = document.createElement('img');
-        // img.src = testimonial.clientImage;
-        img.src = "";
+
+        // Try to use LinkedIn image, fallback to placeholder
+        if (testimonial.linkedinImage) {
+            img.src = testimonial.linkedinImage;
+            img.onerror = () => {
+                // Fallback to a default avatar if LinkedIn image fails
+                img.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(testimonial.clientName)}&background=38ac5f&color=fff&size=96`;
+            };
+        } else {
+            img.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(testimonial.clientName)}&background=38ac5f&color=fff&size=96`;
+        }
+
         img.alt = testimonial.clientName;
         img.loading = 'lazy';
         clientAvatar.appendChild(img);
@@ -106,12 +149,44 @@ class TestimonialsSection {
         const h4 = document.createElement('h4');
         h4.textContent = testimonial.clientName;
 
-        const position = document.createElement('p');
-        position.className = 'position';
-        position.textContent = testimonial.clientPosition;
+        // Position labels
+        if (testimonial.positions && testimonial.positions.length > 0) {
+            const positionContainer = document.createElement('div');
+            positionContainer.className = 'position-container';
+            testimonial.positions.forEach((pos, index) => {
+                const position = document.createElement('p');
+                position.className = 'position';
+                position.textContent = pos;
+                positionContainer.appendChild(position);
+            });
+            clientDetails.appendChild(h4);
+            clientDetails.appendChild(positionContainer);
+        }
 
-        clientDetails.appendChild(h4);
-        clientDetails.appendChild(position);
+        // Company labels
+        if (testimonial.companies && testimonial.companies.length > 0) {
+            const companyContainer = document.createElement('div');
+            companyContainer.className = 'company-container';
+            testimonial.companies.forEach((comp, index) => {
+                const company = document.createElement('p');
+                company.className = 'company';
+                company.textContent = comp;
+                companyContainer.appendChild(company);
+            });
+            clientDetails.appendChild(companyContainer);
+        }
+
+        // LinkedIn button
+        if (testimonial.profileUrl) {
+            const linkedinBtn = document.createElement('a');
+            linkedinBtn.href = testimonial.profileUrl;
+            linkedinBtn.target = '_blank';
+            linkedinBtn.rel = 'noopener noreferrer';
+            linkedinBtn.className = 'linkedin-btn';
+            linkedinBtn.innerHTML = '<i class="bi bi-linkedin"></i>';
+            linkedinBtn.setAttribute('aria-label', `View ${testimonial.clientName}'s LinkedIn profile`);
+            clientDetails.appendChild(linkedinBtn);
+        }
 
         // Assemble client info
         clientInfo.appendChild(clientAvatar);
@@ -125,7 +200,17 @@ class TestimonialsSection {
         return card;
     }
 
-    render() {
+    async render() {
+        // Load data if not already loaded
+        if (!this.dataLoaded) {
+            await this.loadTestimonialsData();
+        }
+
+        // Show loading if data is still not available
+        if (!this.config) {
+            return this.createLoadingSection();
+        }
+
         const section = document.createElement('section');
         section.id = 'testimonials';
         section.className = 'testimonials section';
@@ -148,6 +233,25 @@ class TestimonialsSection {
         container.appendChild(grid);
         section.appendChild(container);
 
+        return section;
+    }
+
+    createLoadingSection() {
+        const section = document.createElement('section');
+        section.id = 'testimonials';
+        section.className = 'testimonials section';
+
+        const container = document.createElement('div');
+        container.className = 'container';
+
+        container.innerHTML = `
+            <div class="loading-testimonials">
+                <div class="loading-spinner"></div>
+                <p>Loading Testimonials...</p>
+            </div>
+        `;
+
+        section.appendChild(container);
         return section;
     }
 
@@ -176,6 +280,41 @@ class TestimonialsSection {
     initialize() {
         console.log('Testimonials section initialized');
         this.initializeAnimations();
+    }
+
+    // Method to update testimonials data
+    async updateTestimonials(newData) {
+        this.config = { ...this.config, ...newData };
+        this.dataLoaded = true;
+        const existingSection = document.getElementById('testimonials');
+        if (existingSection) {
+            const newSection = await this.render();
+            existingSection.parentNode.replaceChild(newSection, existingSection);
+            this.initialize();
+        }
+    }
+
+    // Method to refresh data from JSON
+    async refreshData() {
+        this.dataLoaded = false;
+        this.config = null;
+        await this.loadTestimonialsData();
+
+        const existingSection = document.getElementById('testimonials');
+        if (existingSection) {
+            const newSection = await this.render();
+            existingSection.parentNode.replaceChild(newSection, existingSection);
+            this.initialize();
+        }
+    }
+
+    // Cleanup method
+    cleanup() {
+        // Remove any remaining event listeners
+        const testimonialsSection = document.getElementById('testimonials');
+        if (testimonialsSection) {
+            testimonialsSection.remove();
+        }
     }
 }
 

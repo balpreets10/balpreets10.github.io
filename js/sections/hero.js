@@ -9,12 +9,19 @@ class HeroSection {
             typedItems: ["Crafting Digital Worlds", "Leading Creative Teams", "Building Tomorrow's Games"],
             description: "Welcome to my interactive journey through the realm of game development. From concept to completion, I've been shaping digital experiences that captivate, challenge, and inspire players worldwide. Dive into my world where code meets creativity and imagination becomes reality.</br>This website is an example of my adaptability and scrappiness in learning new technologies and frameworks.",
             actions: [
-                { href: '#about', text: 'My Journey', class: 'btn btn-primary' },
-                { href: '#contact', text: 'Get In Touch', class: 'btn btn-outline' }
+                { href: '#portfolio', text: 'My Journey', class: 'btn btn-primary' },
+                { href: '#contact', text: 'Get In Touch', class: 'btn btn-outline' },
+                {
+                    href: 'assets/resume/Balpreet-Team-Lead-Senior-Unity-Developer-Resume.pdf',
+                    text: 'Download Resume',
+                    class: 'btn btn-secondary',
+                    download: 'Balpreet-Team-Lead-Senior-Unity-Developer-Resume.pdf',
+                    target: '_blank'
+                }
             ],
             socialLinks: [
-                { href: 'https://linkedin.com/in/yourprofile', icon: 'bi-linkedin', label: 'LinkedIn' },
-                { href: 'https://github.com/yourusername', icon: 'bi-github', label: 'GitHub' },
+                { href: 'https://linkedin.com/in/balpreets7', icon: 'bi-linkedin', label: 'LinkedIn' },
+                { href: 'https://github.com/balpreets10', icon: 'bi-github', label: 'GitHub' },
                 { href: 'https://balpreets7.itch.io', icon: 'bi-joystick', label: 'Itch.io' }
             ],
             stats: [
@@ -31,7 +38,7 @@ class HeroSection {
                     label: 'Total Downloads',
                     tooltip: 'Combined downloads across all published games and applications',
                     suffix: " +",
-                    delay: 200
+                    delay: 150
                 },
                 {
                     icon: 'bi-calendar-check',
@@ -39,7 +46,7 @@ class HeroSection {
                     label: 'Years Experience',
                     tooltip: 'Professional game development and team leadership experience',
                     suffix: " +",
-                    delay: 300
+                    delay: 200
                 },
                 {
                     icon: 'bi-star-fill',
@@ -47,7 +54,7 @@ class HeroSection {
                     label: 'Client Satisfaction',
                     tooltip: 'Average client satisfaction rating based on project reviews',
                     suffix: '%',
-                    delay: 400
+                    delay: 250
                 }
             ],
             // Available title animations - can be switched via CSS class
@@ -128,6 +135,20 @@ class HeroSection {
             a.href = action.href;
             a.className = action.class;
             a.textContent = action.text;
+
+            a.href = action.href;
+            a.className = action.class;
+            a.textContent = action.text;
+
+            // Handle download attribute
+            if (action.download) {
+                a.setAttribute('download', action.download);
+            }
+
+            // Handle target attribute
+            if (action.target) {
+                a.setAttribute('target', action.target);
+            }
             actions.appendChild(a);
         });
 
@@ -137,6 +158,8 @@ class HeroSection {
             const a = document.createElement('a');
             a.href = link.href;
             a.title = link.label;
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
             a.innerHTML = `<i class="${link.icon}"></i>`;
             socialLinks.appendChild(a);
         });
@@ -414,6 +437,14 @@ class HeroSection {
         setTimeout(() => {
             this.initializeCounters();
             this.initializeTooltips();
+
+            // Track animation with hero tracker
+            if (window.analyticsManager) {
+                const heroTracker = window.analyticsManager.getSectionTracker('hero');
+                if (heroTracker) {
+                    heroTracker.trackAnimation(this.config.currentAnimation);
+                }
+            }
         }, 100);
     }
 }

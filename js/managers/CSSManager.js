@@ -6,26 +6,35 @@ class CSSManager {
         this.stylesheets = {};
         this.defaultVersion = '1.0.0';
         const version = Date.now();
-        this.addStylesheet('variables', 'css/variables.css', version, true);
-        this.addStylesheet('animations', 'css/animations.css', version, true);
-        this.addStylesheet('preloader', 'css/preloader.css', version, true);
-        this.addStylesheet('performance-optimizations', 'css/performance.css', version, true);
+
+        //Base
         // this.addStylesheet('variables', 'css/themes/variables-matrix.css', version, true);
-        this.addStylesheet('base', 'css/base.css', version, true);
+        this.addStylesheet('variables', 'css/base/variables.css', version, true);
+        this.addStylesheet('animations', 'css/base/animations.css', version, true);
+        this.addStylesheet('preloader', 'css/base/preloader.css', version, true);
+        this.addStylesheet('base', 'css/base/base.css', version, true);
+        this.addStylesheet('modal-base', 'css/base/modal-base.css', version, true);
 
-        this.addStylesheet('bootstrap-icons', 'assets/vendor/bootstrap-icons/bootstrap-icons.css', '1.0.0', true);
-        this.addStylesheet('header', 'css/header.css', version, true);
+        this.addStylesheet('performance-optimizations', 'css/performance.css', version, true);
+        this.addStylesheet('scroll-to-top', 'css/scrollToTop.css', version, true);
 
-        this.addStylesheet('hero', 'css/hero.css', version, true);
-        this.addStylesheet('game', 'css/game.css', version, true);
-        this.addStylesheet('portfolio', 'css/portfolio.css', version, true);
-        this.addStylesheet('skills', 'css/skills.css', version, true);
-        this.addStylesheet('experience', 'css/experience.css', version, true);
-        this.addStylesheet('testimonials', 'css/testimonials.css', version, true);
-        this.addStylesheet('contact', 'css/contact.css', version, true);
+        // Sections
+        this.addStylesheet('header', 'css/sections/header.css', version, true);
+        this.addStylesheet('hero', 'css/sections/hero.css', version, true);
+        this.addStylesheet('game', 'css/sections/game.css', version, true);
+        this.addStylesheet('portfolio', 'css/sections/portfolio.css', version, true);
+        this.addStylesheet('skills', 'css/sections/skills.css', version, true);
+        this.addStylesheet('experience', 'css/sections/experience.css', version, true);
+        this.addStylesheet('testimonials', 'css/sections/testimonials.css', version, true);
+        this.addStylesheet('contact', 'css/sections/contact.css', version, true);
 
-        // this.addStylesheet('test', 'assets/css/main.css', version, true);
-
+        //Component
+        this.addStylesheet('project-modal', 'css/components/project-modal.css', version, true);
+        this.addStylesheet('game-modal', 'css/components/game-modal.css', version, true);
+        this.addStylesheet('skills-modal', 'css/components/skills-modal.css', version, true);
+        this.addStylesheet('consent-footer', 'css/components/tracking-consent-footer.css', version, true);
+        this.addStylesheet('responsive-images', 'css/components/responsive-images.css', version, true);
+        this.addStylesheet('chat-widget', 'css/components/chat-widget.css', version, true);
 
     }
 

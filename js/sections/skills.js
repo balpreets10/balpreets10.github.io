@@ -1,13 +1,11 @@
 /**
- * Optimized Skills Section - Gaming-themed with Mobile Performance Focus
+ * Optimized Skills Section - Streamlined and compact
  */
 class SkillsSection {
     constructor() {
         this.config = {
             title: "Skill Matrix",
             subtitle: "Expertise Unlocked Through 8+ Years of Development",
-
-            // Unity spotlight data with Unity logo
             unity: {
                 title: "Unity Engine Mastery",
                 level: "Expert Level • 8+ Years",
@@ -19,115 +17,63 @@ class SkillsSection {
                     "GPU/CPU Profiling", "Cloud Build", "IAP", "URP",
                     "Occlusion Culling", "LOD Groups", "Cinemachine"
                 ],
-                xp: 95,
-                icon: "ᵁ" // Unity logo representation
+                icon: "ᵁ"
             },
-
-            // Skill categories with optimized layout
-            categories: [
-                {
-                    id: 1,
-                    title: "Core Programming",
-                    icon: "💻",
-                    color: "#38ac5f",
-                    skills: ["C#", "OOP", "SOLID", "DOD", "Performance Optimization", "Memory Optimization"],
-                    level: 95,
-                    description: "Foundation of all development work"
-                },
-                {
-                    id: 2,
-                    title: "Design Patterns",
-                    icon: "🏗️",
-                    color: "#ff0080",
-                    skills: ["MVC", "Observer", "Factory", "Dependency Injection", "Strategy", "Refactoring Legacy Code"],
-                    level: 90,
-                    description: "Architectural excellence and code structure"
-                },
-                {
-                    id: 3,
-                    title: "Multiplayer Systems",
-                    icon: "🌐",
-                    color: "#00d4ff",
-                    skills: ["Photon PUN2/Fusion", "Playfab", "Mirror", "Unity NetCode"],
-                    level: 85,
-                    description: "Connecting players across the globe"
-                },
-                {
-                    id: 4,
-                    title: "AI Development Tools",
-                    icon: "🤖",
-                    color: "#ffff00",
-                    skills: ["Copilot", "Claude", "Cursor", "DeepSeek"],
-                    level: 88,
-                    description: "Next-gen development acceleration"
-                },
-                {
-                    id: 5,
-                    title: "DevOps & Pipeline",
-                    icon: "⚙️",
-                    color: "#ff6b00",
-                    skills: ["Git", "Sourcetree", "CI/CD Pipelines", "Github Actions"],
-                    level: 80,
-                    description: "Streamlined development workflows"
-                },
-                {
-                    id: 6,
-                    title: "Team Leadership",
-                    icon: "👑",
-                    color: "#9d4edd",
-                    skills: ["Team Management", "Mentorship", "SCRUM", "AGILE", "JIRA", "Collaboration"],
-                    level: 92,
-                    description: "Guiding teams to victory"
-                }
-            ],
-
-            // Reduced skill particles for performance
-            skillParticles: [
-                { text: "Unity", position: "top: 15%; left: 8%;" },
-                { text: "C#", position: "top: 25%; right: 12%;" },
-                { text: "Leadership", position: "top: 45%; left: 5%;" },
-                { text: "Optimization", position: "bottom: 30%; right: 8%;" }
-            ]
+            categories: []
         };
-
-        // Performance detection
-        this.isMobile = window.innerWidth <= 768;
-        this.reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        this.isLowPerformance = this.detectLowPerformance();
-
-        // Animation control
-        this.animationPaused = false;
-        this.visibilityObserver = null;
+        this.skillsData = [];
+        this.isDataLoaded = false;
+        this.isMobile = window.innerWidth <= 992;
+        this.SkillsModal = null;
     }
 
-    detectLowPerformance() {
-        // Simple performance detection
-        const start = performance.now();
-        for (let i = 0; i < 100000; i++) {
-            // Simple computation test
-            Math.random() * Math.random();
-        }
-        const duration = performance.now() - start;
+    // Load JSON data
+    async loadSkillsData() {
+        try {
+            console.log('Loading skills data from JSON...');
+            const response = await fetch('data/skills-data.json');
 
-        return duration > 20 || this.isMobile; // Consider mobile as low performance for animations
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            this.config = { ...this.config, ...data };
+            this.skillsData = data.categories || [];
+            this.isDataLoaded = true;
+
+            console.log(`Loaded skills data from JSON successfully`);
+            return true;
+        } catch (error) {
+            console.error('Error loading skills data:', error);
+
+            // Fallback to default config
+            this.skillsData = this.getDefaultCategories();
+            this.config.categories = this.skillsData;
+            this.isDataLoaded = true;
+            return false;
+        }
     }
 
-    createBackgroundElements() {
-        const bgElements = document.createElement('div');
-        bgElements.className = 'skills-background';
-
-        // Only add particles on desktop for performance
-        if (!this.isMobile && !this.reduceMotion) {
-            bgElements.innerHTML = `
-                <div class="floating-particles">
-                    ${this.config.skillParticles.map(particle => `
-                        <div class="skill-particle" style="${particle.position}">${particle.text}</div>
-                    `).join('')}
-                </div>
-            `;
-        }
-
-        return bgElements;
+    getDefaultCategories() {
+        return [
+            {
+                id: 1,
+                title: "Core Programming",
+                icon: '<i class="fa-solid fa-laptop-code"></i>',
+                color: "#38ac5f",
+                skills: ["C#", "OOP", "SOLID", "DOD", "Performance Optimization", "Memory Optimization"],
+                description: "Foundation of all development work"
+            },
+            {
+                id: 2,
+                title: "Game Development",
+                icon: '<i class="fa-solid fa-gamepad"></i>',
+                color: "#00d4ff",
+                skills: ["Unity Engine", "Game Design", "Physics", "AI", "Multiplayer", "Mobile Games"],
+                description: "Creating immersive gaming experiences"
+            }
+        ];
     }
 
     createSectionHeader() {
@@ -154,11 +100,11 @@ class SkillsSection {
         const spotlight = document.createElement('div');
         spotlight.className = 'unity-spotlight gaming-hover-effect';
         spotlight.setAttribute('data-aos', 'zoom-in');
-        spotlight.setAttribute('data-aos-delay', '200');
+        spotlight.setAttribute('data-aos-delay', '150');
 
-        // Optimize skill categorization
-        const importantSkills = ["Architecture", "Addressables", "DoTween", "Shader Graphs"];
-        const mediumSkills = ["Scriptable Objects", "Memory Profiler", "UI Toolkit", "URP", "Cinemachine"];
+        // Simplified skill categorization
+        const importantSkills = ["Architecture", "Addressables", "Scriptable Objects", "Shader Graphs"];
+        const mediumSkills = ["DoTween", "Memory Profiler", "UI Toolkit", "URP", "Cinemachine"];
 
         const skillsHtml = unity.skills.map((skill, index) => {
             let sizeClass = 'size-small';
@@ -167,19 +113,11 @@ class SkillsSection {
             if (importantSkills.includes(skill)) {
                 sizeClass = 'size-large';
                 extraClasses = 'featured';
-                // Only add floating on desktop
-                if (!this.isMobile && !this.isLowPerformance) {
-                    extraClasses += ' floating';
-                }
             } else if (mediumSkills.includes(skill)) {
                 sizeClass = 'size-medium';
-                // Randomly add floating to some medium skills on desktop only
-                if (!this.isMobile && !this.isLowPerformance && Math.random() > 0.7) {
-                    extraClasses = 'floating';
-                }
             }
 
-            return `<div class="skill-pill ${sizeClass} ${extraClasses} gaming-hover-effect" style="animation-delay: ${index * 0.1}s">
+            return `<div class="skill-pill ${sizeClass} ${extraClasses} gaming-hover-effect">
                 <span>${skill}</span>
             </div>`;
         }).join('');
@@ -187,100 +125,105 @@ class SkillsSection {
         spotlight.innerHTML = `
             <div class="spotlight-header">
                 <div class="unity-emblem">
-                    <div class="emblem-core">${unity.icon}</div>
-                    <div class="emblem-ring"></div>
+                    <div class="emblem-core"><i class="fa-brands fa-unity"></i></div>
                 </div>
                 <div class="unity-info">
                     <h3 class="unity-title">${unity.title}</h3>
                     <div class="unity-level">${unity.level}</div>
                     <p class="unity-description">${unity.description}</p>
                 </div>
-                <div class="xp-display">
-                    <div class="xp-number">${unity.xp}</div>
-                    <div class="xp-label">XP</div>
-                </div>
             </div>
             
             <div class="unity-skills-cloud">
                 ${skillsHtml}
-            </div>
-            
-            <div class="progress-container">
-                <div class="progress-label">Mastery Level</div>
-                <div class="progress-track">
-                    <div class="progress-energy" style="--progress: ${unity.xp}%"></div>
-                    <div class="progress-markers">
-                        ${Array.from({ length: 10 }, (_, i) => `
-                            <div class="marker ${i < Math.floor(unity.xp / 10) ? 'active' : ''}" style="left: ${i * 10}%"></div>
-                        `).join('')}
-                    </div>
-                </div>
             </div>
         `;
 
         return spotlight;
     }
 
+    // Create skills categories grid with container wrapper
     createSkillCategories() {
+        const gridContainer = document.createElement('div');
+        gridContainer.className = 'skills-categories-grid-container';
+
         const categoriesGrid = document.createElement('div');
         categoriesGrid.className = 'skills-categories-grid';
+        categoriesGrid.id = 'skillsCategoriesGrid';
 
-        this.config.categories.forEach((category, index) => {
+        // Show loading state initially
+        if (!this.isDataLoaded) {
+            categoriesGrid.innerHTML = `
+                <div class="skills-loading">
+                    <div class="loading-spinner"></div>
+                    <p>Loading skills...</p>
+                </div>
+            `;
+        } else {
+            this.renderSkillCategories(categoriesGrid);
+        }
+
+        gridContainer.appendChild(categoriesGrid);
+        return gridContainer;
+    }
+
+    // Render skill categories
+    renderSkillCategories(container) {
+        container.innerHTML = '';
+
+        if (this.skillsData.length === 0) {
+            container.innerHTML = `
+                <div class="skills-empty">
+                    <p>No skills data available at the moment.</p>
+                </div>
+            `;
+            return;
+        }
+
+        this.skillsData.forEach((category, index) => {
             const categoryCard = document.createElement('div');
             categoryCard.className = 'skill-category gaming-hover-effect';
             categoryCard.setAttribute('data-aos', 'fade-up');
-            categoryCard.setAttribute('data-aos-delay', `${200 + (index * 100)}`);
+            categoryCard.setAttribute('data-aos-delay', `${100 + (index * 50)}`);
             categoryCard.setAttribute('data-category-id', category.id);
 
             categoryCard.innerHTML = `
                 <div class="category-header">
                     <div class="category-icon" style="--category-color: ${category.color}">
                         <span class="icon-symbol">${category.icon}</span>
-                        <div class="icon-glow"></div>
                     </div>
                     <div class="category-info">
                         <h4 class="category-title">${category.title}</h4>
                         <p class="category-description">${category.description}</p>
                     </div>
-                    <div class="level-badge">
-                        <span class="level-number">${category.level}</span>
-                        <span class="level-text">LVL</span>
-                    </div>
                 </div>
                 
                 <div class="skills-grid">
-                    ${category.skills.map((skill, skillIndex) => `
-                        <div class="skill-chip gaming-hover-effect" style="animation-delay: ${skillIndex * 0.1}s">
+                    ${category.skills.map((skill) => `
+                        <div class="skill-chip gaming-hover-effect">
                             <span class="skill-name">${skill}</span>
                         </div>
                     `).join('')}
                 </div>
-                
-                <div class="category-stats">
-                    <div class="stat-bar">
-                        <div class="stat-fill" style="--fill-width: ${category.level}%; --fill-color: ${category.color}"></div>
-                    </div>
-                    <div class="stat-text">Proficiency: ${category.level}%</div>
-                </div>
             `;
 
-            categoriesGrid.appendChild(categoryCard);
-        });
+            container.appendChild(categoryCard);
 
-        return categoriesGrid;
+            // Add click handler
+            categoryCard.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (this.SkillsModal) {
+                    this.SkillsModal.showSkillModal(category.id);
+                }
+            });
+        });
     }
 
+    // Synchronous render method (SectionManager requirement)
     render() {
         const section = document.createElement('section');
         section.id = 'skills';
-        section.className = 'skills-section game-section';
-
-        // Add performance class if needed
-        if (this.isLowPerformance) {
-            section.classList.add('low-performance');
-        }
-
-        section.appendChild(this.createBackgroundElements());
+        section.className = 'skills-section';
 
         const container = document.createElement('div');
         container.className = 'container';
@@ -298,333 +241,169 @@ class SkillsSection {
         return section;
     }
 
-    initializeParticleSystem() {
-        // Only initialize on desktop for performance
-        if (this.isMobile || this.reduceMotion || this.isLowPerformance) {
-            return;
-        }
+    // Load data and update UI
+    async loadDataAndUpdate() {
+        const success = await this.loadSkillsData();
 
-        const particlesContainer = document.querySelector('.floating-particles');
-        if (!particlesContainer) return;
+        if (success || this.isDataLoaded) {
+            // Update the categories grid
+            const grid = document.getElementById('skillsCategoriesGrid');
+            if (grid) {
+                this.renderSkillCategories(grid);
 
-        // Create fewer particles for better performance
-        for (let i = 0; i < 4; i++) {
-            this.createFloatingParticle(particlesContainer);
-        }
-
-        // Slower particle generation
-        this.particleInterval = setInterval(() => {
-            if (particlesContainer && particlesContainer.children.length < 8 && !this.animationPaused) {
-                this.createFloatingParticle(particlesContainer);
+                // Reinitialize interactions
+                setTimeout(() => {
+                    this.initializeInteractions();
+                    this.setupMobileScrollIndicators();
+                }, 100);
             }
-        }, 5000);
+        } else {
+            // Show error state
+            const grid = document.getElementById('skillsCategoriesGrid');
+            if (grid) {
+                grid.innerHTML = `
+                    <div class="skills-error">
+                        <p>Failed to load skills. Please try refreshing the page.</p>
+                    </div>
+                `;
+            }
+        }
     }
 
-    createFloatingParticle(container) {
-        const particle = document.createElement('div');
-        particle.className = 'floating-particle';
+    // Initialize method called by SectionManager (async data loading)
+    async initialize() {
+        console.log('Skills section initializing...');
 
-        const symbols = ['◆', '●', '▲', '✦'];
-        const symbol = symbols[Math.floor(Math.random() * symbols.length)];
+        // Initialize SkillsModal if available
+        if (window.SkillsModal) {
+            this.SkillsModal = new window.SkillsModal();
+        }
 
-        particle.textContent = symbol;
-        particle.style.cssText = `
-            position: absolute;
-            left: ${Math.random() * 100}%;
-            top: ${Math.random() * 100}%;
-            font-size: ${8 + Math.random() * 8}px;
-            color: var(--accent-color);
-            opacity: ${0.2 + Math.random() * 0.2};
-            animation: particleFloatUp ${6 + Math.random() * 6}s linear infinite;
-            animation-delay: ${Math.random() * 2}s;
-            pointer-events: none;
-        `;
+        // Load data and update UI
+        await this.loadDataAndUpdate();
 
-        container.appendChild(particle);
-
-        // Remove particle after animation
-        setTimeout(() => {
-            if (particle.parentNode) {
-                particle.remove();
-            }
-        }, 12000);
-    }
-
-    initializeProgressAnimations() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Animate progress bars
-                    const progressBars = entry.target.querySelectorAll('.progress-energy, .stat-fill');
-                    progressBars.forEach((bar, index) => {
-                        setTimeout(() => {
-                            bar.style.transform = 'scaleX(1)';
-                        }, index * 200);
-                    });
-
-                    // Add reveal animation to skills
-                    const skillChips = entry.target.querySelectorAll('.skill-chip, .skill-pill');
-                    skillChips.forEach((chip, index) => {
-                        setTimeout(() => {
-                            chip.style.opacity = '1';
-                            chip.style.transform = 'translateY(0)';
-                        }, index * 50);
-                    });
-
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.2 });
-
-        // Observe all skill categories and unity spotlight
-        document.querySelectorAll('.skill-category, .unity-spotlight').forEach(element => {
-            observer.observe(element);
-        });
+        console.log('Skills section initialized successfully');
     }
 
     initializeInteractions() {
-        // Optimized hover effects
+        // Simple hover state management
         document.querySelectorAll('.skill-chip, .skill-pill').forEach(chip => {
             chip.addEventListener('mouseenter', () => {
-                if (!this.isMobile) {
-                    this.createOptimizedRipple(chip);
-                }
-            });
-        });
-
-        // Unity spotlight special effects (desktop only)
-        const unitySpotlight = document.querySelector('.unity-spotlight');
-        if (unitySpotlight && !this.isMobile) {
-            unitySpotlight.addEventListener('mouseenter', () => {
-                unitySpotlight.classList.add('spotlight-active');
+                chip.classList.add('hovered');
             });
 
-            unitySpotlight.addEventListener('mouseleave', () => {
-                unitySpotlight.classList.remove('spotlight-active');
-            });
-        }
-
-        // Category click interactions (simplified)
-        document.querySelectorAll('.skill-category').forEach(category => {
-            category.addEventListener('click', () => {
-                this.toggleCategoryFocus(category);
+            chip.addEventListener('mouseleave', () => {
+                chip.classList.remove('hovered');
             });
         });
     }
 
-    createOptimizedRipple(element) {
-        const ripple = document.createElement('div');
-        ripple.className = 'skill-ripple';
+    // Mobile scroll indicators and enhanced UX
+    setupMobileScrollIndicators() {
+        if (window.innerWidth > 992) return;
 
-        ripple.style.cssText = `
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 4px;
-            height: 4px;
-            background: var(--accent-color);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            animation: skillRipple 0.4s ease-out;
-            pointer-events: none;
-            z-index: 10;
-        `;
+        const skillsGrid = document.querySelector('.skills-section .skills-categories-grid');
+        if (!skillsGrid) return;
 
-        element.style.position = 'relative';
-        element.appendChild(ripple);
-
-        // Add ripple animation if not exists
-        if (!document.querySelector('#skill-ripple-keyframes')) {
-            const style = document.createElement('style');
-            style.id = 'skill-ripple-keyframes';
-            style.textContent = `
-                @keyframes skillRipple {
-                    0% {
-                        width: 4px;
-                        height: 4px;
-                        opacity: 1;
-                    }
-                    100% {
-                        width: 30px;
-                        height: 30px;
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(style);
-        }
-
-        setTimeout(() => {
-            if (ripple.parentNode) {
-                ripple.remove();
-            }
-        }, 400);
+        // Add touch enhancement
+        this.enhanceTouchScrolling(skillsGrid);
     }
 
-    toggleCategoryFocus(category) {
-        const isExpanded = category.classList.contains('expanded');
+    enhanceTouchScrolling(grid) {
+        let startX = 0;
+        let scrollLeft = 0;
+        let isDown = false;
+        let isDragging = false;
 
-        // Remove focus from other categories
-        document.querySelectorAll('.skill-category.expanded').forEach(otherCategory => {
-            if (otherCategory !== category) {
-                otherCategory.classList.remove('expanded');
+        // Mouse events for desktop
+        grid.addEventListener('mousedown', (e) => {
+            isDown = true;
+            isDragging = false;
+            grid.classList.add('dragging');
+            startX = e.pageX - grid.offsetLeft;
+            scrollLeft = grid.scrollLeft;
+            e.preventDefault();
+        });
+
+        grid.addEventListener('mouseleave', () => {
+            isDown = false;
+            grid.classList.remove('dragging');
+        });
+
+        grid.addEventListener('mouseup', () => {
+            isDown = false;
+            grid.classList.remove('dragging');
+
+            if (isDragging) {
+                setTimeout(() => {
+                    isDragging = false;
+                }, 50);
             }
         });
 
-        category.classList.toggle('expanded');
+        grid.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            isDragging = true;
+            const x = e.pageX - grid.offsetLeft;
+            const walk = (x - startX) * 2;
+            grid.scrollLeft = scrollLeft - walk;
+        });
+
+        // Enhanced touch scrolling
+        grid.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].pageX - grid.offsetLeft;
+            scrollLeft = grid.scrollLeft;
+            isDragging = false;
+        }, { passive: true });
+
+        grid.addEventListener('touchmove', (e) => {
+            isDragging = true;
+            const x = e.touches[0].pageX - grid.offsetLeft;
+            const walk = (x - startX) * 2;
+            grid.scrollLeft = scrollLeft - walk;
+        }, { passive: true });
+
+        grid.addEventListener('touchend', () => {
+            if (isDragging) {
+                setTimeout(() => {
+                    isDragging = false;
+                }, 50);
+            }
+        }, { passive: true });
+
+        // Prevent click events on cards when dragging/swiping
+        grid.addEventListener('click', (e) => {
+            if (isDragging) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }, true);
     }
 
-    initializeVisibilityControl() {
-        // Pause animations when not visible for performance
-        this.visibilityObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                const skillsSection = entry.target;
-                if (entry.isIntersecting) {
-                    this.animationPaused = false;
-                    skillsSection.classList.remove('animation-paused');
-                } else {
-                    this.animationPaused = true;
-                    skillsSection.classList.add('animation-paused');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        const skillsSection = document.getElementById('skills');
-        if (skillsSection) {
-            this.visibilityObserver.observe(skillsSection);
+    async updateSkills(newData) {
+        this.config = { ...this.config, ...newData };
+        this.isDataLoaded = true;
+        const existingSection = document.getElementById('skills');
+        if (existingSection) {
+            const newSection = await this.render();
+            existingSection.parentNode.replaceChild(newSection, existingSection);
+            await this.initialize();
         }
     }
 
-    initializeResponsiveHandling() {
-        // Handle window resize
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                const wasMobile = this.isMobile;
-                this.isMobile = window.innerWidth <= 768;
-
-                // If switching between mobile and desktop, reinitialize
-                if (wasMobile !== this.isMobile) {
-                    this.cleanup();
-                    this.initialize();
-                }
-            }, 250);
-        });
+    async refreshData() {
+        this.isDataLoaded = false;
+        this.config = null;
+        await this.loadDataAndUpdate();
     }
 
     cleanup() {
-        // Clear intervals and observers
-        if (this.particleInterval) {
-            clearInterval(this.particleInterval);
-        }
-
-        if (this.visibilityObserver) {
-            this.visibilityObserver.disconnect();
-        }
-
-        // Remove particles
-        const particles = document.querySelectorAll('.floating-particle');
-        particles.forEach(particle => particle.remove());
-    }
-
-    // Initialize all systems
-    initialize() {
-        console.log('Skills section initialized with performance optimizations');
-        console.log(`Performance mode: ${this.isLowPerformance ? 'Low' : 'High'}`);
-        console.log(`Device: ${this.isMobile ? 'Mobile' : 'Desktop'}`);
-
-        // Initialize systems based on performance capability
-        this.initializeProgressAnimations();
-        this.initializeInteractions();
-        this.initializeResponsiveHandling();
-        this.initializeVisibilityControl();
-
-        // Only initialize particles on capable devices
-        if (!this.isLowPerformance && !this.isMobile) {
-            this.initializeParticleSystem();
-        }
-
-        // Add performance monitoring in development
-        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-            this.initializePerformanceMonitoring();
-        }
-    }
-
-    initializePerformanceMonitoring() {
-        let frameCount = 0;
-        let lastTime = performance.now();
-
-        const measureFPS = () => {
-            const currentTime = performance.now();
-            frameCount++;
-
-            if (currentTime - lastTime >= 1000) {
-                const fps = Math.round((frameCount * 1000) / (currentTime - lastTime));
-                console.log(`Skills Section FPS: ${fps}`);
-
-                // Auto-adjust performance if FPS drops
-                if (fps < 30 && !this.isLowPerformance) {
-                    console.log('Low FPS detected, switching to performance mode');
-                    this.switchToPerformanceMode();
-                }
-
-                frameCount = 0;
-                lastTime = currentTime;
-            }
-
-            if (!this.animationPaused) {
-                requestAnimationFrame(measureFPS);
-            }
-        };
-
-        requestAnimationFrame(measureFPS);
-    }
-
-    switchToPerformanceMode() {
-        this.isLowPerformance = true;
         const skillsSection = document.getElementById('skills');
         if (skillsSection) {
-            skillsSection.classList.add('low-performance');
-        }
-
-        // Remove particles
-        const particles = document.querySelectorAll('.floating-particle');
-        particles.forEach(particle => particle.remove());
-
-        // Clear particle interval
-        if (this.particleInterval) {
-            clearInterval(this.particleInterval);
-        }
-    }
-
-    // Method to update skills data
-    updateSkills(newData) {
-        this.config = { ...this.config, ...newData };
-        const existingSection = document.getElementById('skills');
-        if (existingSection) {
-            this.cleanup();
-            const newSection = this.render();
-            existingSection.parentNode.replaceChild(newSection, existingSection);
-            this.initialize();
-        }
-    }
-
-    // Public method to toggle performance mode
-    setPerformanceMode(enabled) {
-        this.isLowPerformance = enabled;
-        const skillsSection = document.getElementById('skills');
-        if (skillsSection) {
-            skillsSection.classList.toggle('low-performance', enabled);
-        }
-
-        if (enabled) {
-            this.cleanup();
-        } else if (!this.isMobile) {
-            this.initializeParticleSystem();
+            skillsSection.remove();
         }
     }
 }
 
-// Global instance
 window.SkillsSection = SkillsSection;
